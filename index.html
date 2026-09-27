@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[NOMBRE DE LA MARCA] | Gestión de tráfico digital y generación de leads</title>
+<meta name="description" content="Gestionamos tus campañas en Meta Ads y Google Ads para que tu negocio reciba clientes potenciales calificados de forma constante.">
+
+<!-- ============================================================
+     META PIXEL (placeholder) — reemplaza TU_PIXEL_ID_AQUI
+     ============================================================ -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'TU_PIXEL_ID_AQUI');
+fbq('track', 'PageView');
+</script>
+
+<!-- ============================================================
+     GA4 (opcional) — descomenta y reemplaza G-XXXXXXXXXX
+     ============================================================
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   BLOQUE DE CONFIGURACIÓN VISUAL — EDITA AQUÍ
+   ============================================================ */
+:root{
+  --bg:#0a0e14;
+  --bg-soft:#0f1620;
+  --surface:#141c27;
+  --surface-2:#1b2530;
+  --border:rgba(255,255,255,.08);
+  --text:#f4f6f8;
+  --text-muted:#99a3af;
+  --accent:#ff6a3d;
+  --accent-light:#ff8c61;
+  --accent-dark:#e4551f;
+  --ok:#22c55e;
+  --error:#f87171;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --maxw:1180px;
+  --font-head:'Sora',sans-serif;
+  --font-body:'Inter',sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none}
+h1,h2,h3,h4{font-family:var(--font-head);line-height:1.15;letter-spacing:-.01em}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.section{padding:96px 0}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--accent);font-weight:600;font-size:13px;
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;
+}
+.eyebrow::before{content:"";width:8px;height:8px;background:var(--accent);border-radius:2px}
+h2.title{font-size:clamp(28px,4vw,42px);font-weight:800;margin-bottom:16px}
+p.lead{color:var(--text-muted);font-size:18px;max-width:640px}
+
+/* ---------- botones ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 28px;border-radius:999px;font-weight:700;font-size:16px;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--accent);color:#1a0900;
+  box-shadow:0 8px 24px rgba(255,106,61,.35);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,106,61,.5);background:var(--accent-light)}
+.btn-primary:active{transform:translateY(0)}
+.btn-sm{padding:11px 20px;font-size:14px;border-radius:999px}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(10,14,20,.7);backdrop-filter:blur(12px);
+  border-bottom:1px solid transparent;
+  transition:border-color .2s ease, background .2s ease;
+}
+header.scrolled{border-color:var(--border);background:rgba(10,14,20,.92)}
+header .container{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{font-family:var(--font-head);font-weight:800;font-size:20px;letter-spacing:-.02em}
+
+/* ---------- hero ---------- */
+.hero{padding:180px 0 80px;position:relative}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(ellipse 60% 50% at 50% 0%, black 40%, transparent 80%);
+  mask-image:radial-gradient(ellipse 60% 50% at 50% 0%, black 40%, transparent 80%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;max-width:820px}
+.hero h1{font-size:clamp(34px,5.4vw,58px);font-weight:800;margin-bottom:20px}
+.hero h1 .accent{color:var(--accent)}
+.hero p.lead{font-size:19px;margin-bottom:32px}
+.hero-cta-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:64px}
+.trust-note{display:flex;align-items:center;gap:8px;color:var(--text-muted);font-size:14px}
+.trust-note svg{color:var(--ok);flex-shrink:0}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);padding-top:32px;gap:24px}
+.stat b{display:block;font-family:var(--font-head);font-size:clamp(24px,3vw,34px);font-weight:800}
+.stat span{color:var(--text-muted);font-size:14px}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+
+/* ---------- tarjetas genéricas ---------- */
+.grid{display:grid;gap:24px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px;transition:transform .2s ease, border-color .2s ease;
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,106,61,.35)}
+.card .icon{
+  width:44px;height:44px;border-radius:12px;background:rgba(255,106,61,.12);
+  display:flex;align-items:center;justify-content:center;color:var(--accent);margin-bottom:18px;
+}
+.card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.card p{color:var(--text-muted);font-size:15px}
+
+/* ---------- problema ---------- */
+.problema{background:var(--bg-soft)}
+
+/* ---------- metodo ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:step}
+.step{position:relative;padding-top:8px}
+.step .num{
+  font-family:var(--font-head);font-size:15px;font-weight:800;color:var(--accent-dark);
+  background:rgba(255,106,61,.12);width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--accent);
+}
+.step h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.step p{color:var(--text-muted);font-size:14.5px}
+.step:not(:last-child)::after{
+  content:"";position:absolute;top:18px;left:calc(100% - 6px);width:calc(24px + 12px);
+  height:1px;background:var(--border);
+}
+@media(max-width:900px){.step::after{display:none!important}}
+
+/* ---------- resultados ---------- */
+.resultados{background:var(--bg-soft)}
+.result-card{text-align:center}
+.result-card b{font-family:var(--font-head);font-size:36px;font-weight:800;color:var(--accent);display:block;margin-bottom:6px}
+.result-card span{color:var(--text-muted);font-size:14px}
+
+/* ---------- testimonios ---------- */
+.avatar{
+  width:48px;height:48px;border-radius:50%;background:var(--surface-2);
+  display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);
+  font-family:var(--font-head);border:1px solid var(--border);flex-shrink:0;
+}
+.testi-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.testi-head b{display:block;font-size:15px}
+.testi-head span{color:var(--text-muted);font-size:13px}
+.card blockquote{color:var(--text);font-size:15px;font-style:italic}
+
+/* ---------- para quien es / no es ---------- */
+.filtro-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.filtro-card{border-radius:var(--radius);padding:32px;border:1px solid var(--border)}
+.filtro-card.si{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.25)}
+.filtro-card.no{background:rgba(248,113,113,.06);border-color:rgba(248,113,113,.25)}
+.filtro-card h3{font-size:19px;margin-bottom:18px}
+.filtro-card ul{list-style:none;display:flex;flex-direction:column;gap:14px}
+.filtro-card li{display:flex;gap:10px;font-size:15px;color:var(--text-muted)}
+.filtro-card.si li svg{color:var(--ok);flex-shrink:0;margin-top:2px}
+.filtro-card.no li svg{color:var(--error);flex-shrink:0;margin-top:2px}
+
+/* ---------- garantia ---------- */
+.garantia{background:linear-gradient(135deg,var(--accent-dark),var(--accent));border-radius:24px;padding:48px;display:flex;gap:28px;align-items:flex-start}
+.garantia svg{flex-shrink:0;color:#1a0900}
+.garantia h3{color:#1a0900;font-size:24px;margin-bottom:10px}
+.garantia p{color:#3a1a0a;font-size:16px;max-width:640px}
+.garantia p b{color:#1a0900}
+
+/* ---------- faq ---------- */
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{
+  width:100%;background:none;color:var(--text);text-align:left;
+  padding:22px 0;display:flex;align-items:center;justify-content:space-between;
+  font-size:17px;font-weight:600;
+}
+.faq-q svg{transition:transform .25s ease;flex-shrink:0;color:var(--accent)}
+.faq-item.open .faq-q svg{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a p{color:var(--text-muted);padding-bottom:22px;font-size:15px;max-width:680px}
+
+/* ---------- cta final ---------- */
+.cta-final{text-align:center;background:var(--bg-soft)}
+.cta-final h2{font-size:clamp(28px,4.2vw,44px);max-width:760px;margin:0 auto 16px}
+.cta-final p.lead{margin:0 auto 32px}
+.badge-urgente{
+  display:inline-flex;align-items:center;gap:8px;background:rgba(255,106,61,.12);
+  color:var(--accent-light);padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:24px;
+}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--border);padding:56px 0 28px}
+.footer-top{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:32px}
+.footer-brand p{color:var(--text-muted);font-size:14px;max-width:320px;margin-top:10px}
+.footer-contact p{font-size:14px;color:var(--text-muted);margin-bottom:6px}
+.social-row{display:flex;gap:10px;margin-top:16px}
+.social-row a{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;color:var(--text-muted);
+  transition:border-color .2s ease, color .2s ease;
+}
+.social-row a:hover{border-color:var(--accent);color:var(--accent)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--text-muted);font-size:13px}
+
+/* ---------- whatsapp flotante ---------- */
+.wa-float{
+  position:fixed;bottom:24px;right:24px;z-index:90;
+  width:60px;height:60px;border-radius:50%;background:#25D366;
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s ease;
+}
+.wa-float:hover{transform:scale(1.08)}
+
+/* ============================================================
+   POPUP
+   ============================================================ */
+.overlay{
+  position:fixed;inset:0;background:rgba(4,6,10,.7);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;padding:20px;z-index:200;
+  opacity:0;pointer-events:none;transition:opacity .25s ease;
+}
+.overlay.active{opacity:1;pointer-events:auto}
+.modal{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  width:100%;max-width:480px;padding:36px;max-height:92vh;overflow-y:auto;
+  box-shadow:var(--shadow);transform:translateY(16px) scale(.98);transition:transform .25s ease;
+}
+.overlay.active .modal{transform:translateY(0) scale(1)}
+.modal-close{
+  position:absolute;top:20px;right:20px;background:none;color:var(--text-muted);
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;
+}
+.modal-close:hover{color:var(--text);background:var(--surface-2)}
+.modal-header{position:relative;margin-bottom:24px}
+.modal-eyebrow{color:var(--accent);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.modal h2{font-size:24px;margin-bottom:8px}
+.modal p.sub{color:var(--text-muted);font-size:14.5px}
+
+.field{margin-bottom:18px}
+.field label{display:block;font-size:13.5px;font-weight:600;margin-bottom:7px}
+.field label .req{color:var(--accent)}
+.field input,.field select{
+  width:100%;background:var(--bg-soft);border:1px solid var(--border);color:var(--text);
+  border-radius:var(--radius-sm);padding:13px 14px;font-size:15px;font-family:inherit;
+  transition:border-color .15s ease;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent)}
+.field.error input,.field.error select{border-color:var(--error)}
+.field .err-msg{display:none;color:var(--error);font-size:12.5px;margin-top:6px}
+.field.error .err-msg{display:block}
+.phone-row{display:flex;gap:10px}
+.phone-row select{flex:0 0 100px}
+.phone-row input{flex:1}
+
+.checkbox-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:22px}
+.checkbox-row input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent);flex-shrink:0}
+.checkbox-row label{font-size:13.5px;color:var(--text-muted);line-height:1.4}
+.checkbox-row a{color:var(--accent);text-decoration:underline}
+.checkbox-row.error label{color:var(--error)}
+
+.submit-btn{width:100%;position:relative}
+.submit-btn .spinner{
+  display:none;width:18px;height:18px;border:2px solid rgba(0,0,0,.25);
+  border-top-color:#1a0900;border-radius:50%;animation:spin .7s linear infinite;
+}
+.submit-btn.loading .btn-text{opacity:.5}
+.submit-btn.loading .spinner{display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.form-note{color:var(--text-muted);font-size:12px;text-align:center;margin-top:14px}
+
+.thankyou{display:none;text-align:center;padding:12px 0}
+.thankyou.active{display:block}
+.thankyou .check{
+  width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,.15);color:var(--ok);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 20px;
+}
+.thankyou h2{margin-bottom:10px}
+.thankyou p{color:var(--text-muted);margin-bottom:24px;font-size:15px}
+
+/* ---------- responsive ---------- */
+@media(max-width:960px){
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .filtro-grid{grid-template-columns:1fr}
+  .garantia{flex-direction:column}
+  .stats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:640px){
+  .section{padding:64px 0}
+  .hero{padding:140px 0 56px}
+  .steps{grid-template-columns:1fr}
+  .footer-top{flex-direction:column}
+  .stats{gap:16px}
+  .stat b{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     1. HEADER
+     ============================================================ -->
+<header id="siteHeader">
+  <div class="container">
+    <span class="logo js-brand">[NOMBRE DE LA MARCA]</span>
+    <button class="btn btn-primary btn-sm js-open-popup">Quiero más clientes</button>
+  </div>
+</header>
+
+<!-- ============================================================
+     2. HERO
+     ============================================================ -->
+<section class="hero">
+  <div class="container hero-inner">
+    <span class="eyebrow">Captación predecible para negocios que quieren crecer</span>
+    <h1>Llena tu agenda de <span class="accent">clientes potenciales</span> con campañas que sí convierten</h1>
+    <p class="lead">Diseñamos, gestionamos y optimizamos tus campañas en Meta Ads y Google Ads para transformar tu inversión publicitaria en clientes calificados, cada semana.</p>
+    <div class="hero-cta-row">
+      <button class="btn btn-primary js-open-popup">Quiero más clientes</button>
+      <span class="trust-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"/></svg>
+        Diagnóstico inicial sin costo
+      </span>
+    </div>
+    <div class="stats">
+      <div class="stat"><b data-cfg="metrics.campaigns">[+00]</b><span>Campañas gestionadas</span></div>
+      <div class="stat"><b data-cfg="metrics.leads">[+0.000]</b><span>Leads generados</span></div>
+      <div class="stat"><b data-cfg="metrics.budget">[$000K]</b><span>Inversión administrada</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. PROBLEMA
+     ============================================================ -->
+<section class="section problema">
+  <div class="container">
+    <span class="eyebrow reveal">El problema</span>
+    <h2 class="title reveal">Invertir tiempo sin un sistema de captación cuesta más de lo que parece</h2>
+    <p class="lead reveal" style="margin-bottom:40px">Si te identificas con alguno de estos escenarios, no necesitas publicar más. Necesitas una estrategia medible.</p>
+    <div class="grid grid-4">
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8 13 21l3-2-2.5-4.5"/></svg></div>
+        <h3>Publicas, pero no vendes</h3>
+        <p>Hay actividad en redes, pero no conversaciones comerciales constantes.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="3"/></svg></div>
+        <h3>Dependes del voz a voz</h3>
+        <p>Tus referidos funcionan, pero no puedes predecir cuándo llegará el próximo cliente.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Ya gastaste sin resultados</h3>
+        <p>Invertiste en anuncios sin claridad sobre qué funcionó ni por qué.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div>
+        <h3>No conoces tus números</h3>
+        <p>No sabes cuánto cuesta generar una oportunidad o cerrar una venta.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. SOLUCIÓN
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Qué hacemos</span>
+    <h2 class="title reveal">Un sistema de captación, no un anuncio suelto</h2>
+    <p class="lead reveal" style="margin-bottom:40px">Nos encargamos de todo el proceso para que tengas clientes potenciales de forma constante.</p>
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
+        <h3>Estrategia a la medida</h3>
+        <p>Un plan basado en tu oferta, tu margen y tu proceso comercial.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></div>
+        <h3>Creación de anuncios que conectan</h3>
+        <p>Mensajes y piezas pensadas para detener el scroll y generar interés real.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></svg></div>
+        <h3>Segmentación precisa</h3>
+        <p>Llegamos a personas con señales reales de intención y afinidad con tu oferta.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="6" rx="1"/><rect x="4" y="14" width="16" height="6" rx="1"/></svg></div>
+        <h3>Landing y embudo</h3>
+        <p>Una ruta simple que convierte clics en oportunidades comerciales.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></div>
+        <h3>Optimización diaria</h3>
+        <p>Revisamos datos y ajustamos para reducir desperdicio de presupuesto.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V9M12 19V5M20 19v-7"/></svg></div>
+        <h3>Reportes claros</h3>
+        <p>Sabes cuánto inviertes, cuántos leads llegan y cuánto cuesta cada uno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. MÉTODO
+     ============================================================ -->
+<section class="section problema">
+  <div class="container">
+    <span class="eyebrow reveal">Nuestro método</span>
+    <h2 class="title reveal" style="margin-bottom:48px">De la estrategia al crecimiento, sin improvisar</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="num">1</div>
+        <h3>Diagnóstico</h3>
+        <p>Analizamos tu negocio, tu mercado y tu competencia para identificar oportunidades reales.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">2</div>
+        <h3>Estrategia</h3>
+        <p>Diseñamos el plan de campañas, mensajes y segmentación enfocado en resultados medibles.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">3</div>
+        <h3>Lanzamiento</h3>
+        <p>Creamos y activamos tus campañas, con seguimiento desde el primer día.</p>
+      </div>
+      <div class="step reveal">
+        <div class="num">4</div>
+        <h3>Optimización y escala</h3>
+        <p>Ajustamos diariamente para bajar el costo por cliente y escalar lo que funciona.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. RESULTADOS
+     ============================================================ -->
+<section class="section resultados">
+  <div class="container">
+    <span class="eyebrow reveal">Resultados</span>
+    <h2 class="title reveal" style="margin-bottom:40px">Números que respaldan el proceso</h2>
+    <div class="grid grid-3">
+      <div class="card result-card reveal">
+        <b data-cfg="results.0.value">[$0,00]</b>
+        <span data-cfg="results.0.label">Costo por lead promedio</span>
+      </div>
+      <div class="card result-card reveal">
+        <b data-cfg="results.1.value">[000]</b>
+        <span data-cfg="results.1.label">Leads generados en 30 días</span>
+      </div>
+      <div class="card result-card reveal">
+        <b data-cfg="results.2.value">[0.0x]</b>
+        <span data-cfg="results.2.label">Retorno estimado</span>
+      </div>
+    </div>
+    <p class="form-note" style="text-align:left;margin-top:16px">*Cifras de ejemplo. Reemplaza con las métricas reales de tus campañas antes de publicar.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. TESTIMONIOS
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Prueba social</span>
+    <h2 class="title reveal" style="margin-bottom:40px">Negocios que dejaron de depender de la suerte</h2>
+    <div class="grid grid-3">
+      <div class="card reveal">
+        <div class="testi-head">
+          <div class="avatar">AB</div>
+          <div><b>[Nombre del cliente]</b><span>[Tipo de negocio]</span></div>
+        </div>
+        <blockquote>"[Testimonio editable sobre la calidad de los leads y el resultado obtenido.]"</blockquote>
+      </div>
+      <div class="card reveal">
+        <div class="testi-head">
+          <div class="avatar">CD</div>
+          <div><b>[Nombre del cliente]</b><span>[Tipo de negocio]</span></div>
+        </div>
+        <blockquote>"[Testimonio editable sobre la mejora en el costo por oportunidad.]"</blockquote>
+      </div>
+      <div class="card reveal">
+        <div class="testi-head">
+          <div class="avatar">EF</div>
+          <div><b>[Nombre del cliente]</b><span>[Tipo de negocio]</span></div>
+        </div>
+        <blockquote>"[Testimonio editable sobre la constancia de nuevos contactos.]"</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. PARA QUIÉN ES / NO ES
+     ============================================================ -->
+<section class="section problema">
+  <div class="container">
+    <span class="eyebrow reveal">¿Es para ti?</span>
+    <h2 class="title reveal" style="margin-bottom:40px">Trabajamos mejor con negocios que cumplen esto</h2>
+    <div class="filtro-grid">
+      <div class="filtro-card si reveal">
+        <h3>Es para ti si...</h3>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Tienes un negocio o servicio ya establecido.</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Quieres un sistema predecible de clientes, no un anuncio suelto.</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Estás dispuesto a invertir en publicidad de forma constante.</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Buscas datos claros para tomar decisiones.</li>
+        </ul>
+      </div>
+      <div class="filtro-card no reveal">
+        <h3>No es para ti si...</h3>
+        <ul>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Buscas resultados de la noche a la mañana sin invertir.</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> No tienes capacidad de atender más clientes por ahora.</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Buscas la opción más barata sin importar el resultado.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     9. GARANTÍA
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <div class="garantia reveal">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg>
+      <div>
+        <h3>Trabajo transparente, sin humo</h3>
+        <p>Tendrás acceso a reportes claros y visibilidad total sobre tu inversión. <b>Sin contratos que te amarren a largo plazo.</b> [Texto editable según las condiciones reales de tu servicio.]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     10. FAQ
+     ============================================================ -->
+<section class="section problema">
+  <div class="container" style="max-width:820px">
+    <span class="eyebrow reveal">Preguntas frecuentes</span>
+    <h2 class="title reveal" style="margin-bottom:32px">Lo que necesitas saber antes de empezar</h2>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q">¿Cuál es la inversión mínima en publicidad? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Depende del mercado, el ticket promedio y la zona geográfica. En el diagnóstico definimos un punto de partida responsable según tus objetivos.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">¿Cuánto tiempo tarda en ver resultados? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Los primeros datos de aprendizaje llegan en la primera semana. La optimización real de costo por lead suele estabilizarse entre la 3ª y 4ª semana.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">¿En qué plataformas pautan? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Principalmente Meta Ads (Facebook e Instagram). Según tu negocio, también incorporamos Google Ads para captar búsquedas con intención directa.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">¿Cómo se miden los resultados? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>Con reportes periódicos que muestran inversión, leads generados, costo por lead y, cuando es posible, retorno estimado sobre la inversión.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q">¿Hay permanencia mínima? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p>[Editable]: define aquí tu política real de permanencia o confirma que no existe contrato de permanencia mínima.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     11. CTA FINAL
+     ============================================================ -->
+<section class="section cta-final">
+  <div class="container">
+    <span class="badge-urgente reveal">⚡ Cupos limitados de nuevos clientes este mes</span>
+    <h2 class="reveal">Tu próximo cliente puede estar buscando una solución como la tuya ahora mismo</h2>
+    <p class="lead reveal" style="margin-bottom:32px">Conversemos sobre una estrategia realista para convertir esa intención en oportunidades.</p>
+    <button class="btn btn-primary js-open-popup reveal">Quiero más clientes</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     12. FOOTER
+     ============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo js-brand">[NOMBRE DE LA MARCA]</span>
+        <p>Gestión estratégica de campañas para generar oportunidades comerciales.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9v12M10 13a4 4 0 0 1 8 0v8"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <p>[correo@marca.com]</p>
+        <p>[Teléfono de contacto]</p>
+        <p>[Ciudad, País]</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> <span class="js-brand">[NOMBRE DE LA MARCA]</span>. Todos los derechos reservados.</span>
+      <a href="#privacidad">Aviso de privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     WHATSAPP FLOTANTE
+     ============================================================ -->
+<a href="#" id="waFloat" class="wa-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.6-1.2-1.4-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.5-1.3-.7-1.8-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
+</a>
+
+<!-- ============================================================
+     POPUP DE REGISTRO
+     ============================================================ -->
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+
+    <!-- form view -->
+    <div id="formView">
+      <div class="modal-header">
+        <span class="modal-eyebrow">✦ Primer paso</span>
+        <h2 id="modalTitle">Agenda tu diagnóstico gratuito</h2>
+        <p class="sub">Cuéntanos cómo contactarte. Revisaremos tu caso y te explicaremos qué oportunidades vemos.</p>
+      </div>
+
+      <form id="leadForm" novalidate>
+        <div class="field" id="field-nombre">
+          <label for="nombre">Nombre y apellido o nombre de empresa <span class="req">*</span></label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name">
+          <span class="err-msg">Escribe tu nombre o el de tu empresa.</span>
+        </div>
+
+        <div class="field" id="field-telefono">
+          <label for="telefono">Teléfono <span class="req">*</span></label>
+          <div class="phone-row">
+            <select id="dialCode" aria-label="Código de país"></select>
+            <input type="tel" id="telefono" name="telefono" placeholder="300 000 0000" autocomplete="tel">
+          </div>
+          <span class="err-msg">Ingresa un número de teléfono válido.</span>
+        </div>
+
+        <div class="field" id="field-email">
+          <label for="email">Correo electrónico <span class="req">*</span></label>
+          <input type="email" id="email" name="email" autocomplete="email">
+          <span class="err-msg">Ingresa un correo electrónico válido.</span>
+        </div>
+
+        <div class="field" id="field-pais">
+          <label for="pais">País <span class="req">*</span></label>
+          <select id="pais" name="pais"></select>
+        </div>
+
+        <div class="checkbox-row" id="field-privacidad">
+          <input type="checkbox" id="privacidad" name="privacidad">
+          <label for="privacidad">Acepto el <a href="#privacidad" target="_blank">aviso de privacidad</a> y autorizo el contacto sobre esta solicitud.</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
+          <span class="btn-text">Quiero más clientes</span>
+          <span class="spinner"></span>
+        </button>
+        <p class="form-note">Tus datos se usarán únicamente para atender esta solicitud.</p>
+      </form>
+    </div>
+
+    <!-- thank you view -->
+    <div class="thankyou" id="thankyouView">
+      <div class="check">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <h2 id="thankyouTitle">¡Gracias!</h2>
+      <p>Recibimos tus datos. El siguiente paso es conversar brevemente sobre tu negocio y tus objetivos.</p>
+      <a href="#" id="waContinue" class="btn btn-primary" target="_blank" rel="noopener">Continuar por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   BLOQUE DE CONFIGURACIÓN — EDITA AQUÍ ANTES DE PUBLICAR
+   ============================================================ */
+const CONFIG = {
+  BRAND_NAME: "[NOMBRE DE LA MARCA]",
+  WHATSAPP_NUMBER: "573001234567", // solo dígitos, con código de país, sin '+' ni espacios
+  WEBHOOK_URL: "https://TU-WEBHOOK-AQUI.com/endpoint", // Make, Zapier o Google Apps Script (ver ejemplo al final de este script)
+  metrics: {
+    campaigns: "150+",
+    leads: "32,000+",
+    budget: "$1.2M+"
+  },
+  results: [
+    { label: "Costo por lead promedio", value: "$4.80" },
+    { label: "Leads generados en 30 días", value: "480" },
+    { label: "Retorno estimado", value: "4.5x" }
+  ]
+};
+
+/* Países con indicativo — Latinoamérica, España, EE.UU. y Canadá, orden alfabético */
+const COUNTRIES = [
+  { name: "Argentina", dial: "+54" },
+  { name: "Bolivia", dial: "+591" },
+  { name: "Canadá", dial: "+1" },
+  { name: "Chile", dial: "+56" },
+  { name: "Colombia", dial: "+57" },
+  { name: "Costa Rica", dial: "+506" },
+  { name: "Cuba", dial: "+53" },
+  { name: "Ecuador", dial: "+593" },
+  { name: "El Salvador", dial: "+503" },
+  { name: "España", dial: "+34" },
+  { name: "Estados Unidos", dial: "+1" },
+  { name: "Guatemala", dial: "+502" },
+  { name: "Honduras", dial: "+504" },
+  { name: "México", dial: "+52" },
+  { name: "Nicaragua", dial: "+505" },
+  { name: "Panamá", dial: "+507" },
+  { name: "Paraguay", dial: "+595" },
+  { name: "Perú", dial: "+51" },
+  { name: "Puerto Rico", dial: "+1" },
+  { name: "República Dominicana", dial: "+1" },
+  { name: "Uruguay", dial: "+598" },
+  { name: "Venezuela", dial: "+58" }
+];
+const DEFAULT_COUNTRY = "Colombia";
+
+/* ============================================================
+   Aplicar CONFIG al DOM
+   ============================================================ */
+function applyConfig(){
+  document.querySelectorAll('[data-cfg]').forEach(el=>{
+    const path = el.getAttribute('data-cfg');
+    const val = path.split('.').reduce((o,k)=> (o!==undefined && o!==null) ? o[k] : undefined, CONFIG);
+    if (val !== undefined) el.textContent = val;
+  });
+  document.querySelectorAll('.js-brand').forEach(el=> el.textContent = CONFIG.BRAND_NAME);
+  document.title = document.title.replace('[NOMBRE DE LA MARCA]', CONFIG.BRAND_NAME);
+
+  const waUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, quiero más información sobre sus servicios.')}`;
+  document.getElementById('waFloat').href = waUrl;
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+}
+
+/* ============================================================
+   Poblar selects de país / indicativo
+   ============================================================ */
+function populateCountrySelects(){
+  const paisSel = document.getElementById('pais');
+  const dialSel = document.getElementById('dialCode');
+
+  COUNTRIES.forEach(c=>{
+    const opt1 = document.createElement('option');
+    opt1.value = c.name;
+    opt1.textContent = `${c.name} (${c.dial})`;
+    if (c.name === DEFAULT_COUNTRY) opt1.selected = true;
+    paisSel.appendChild(opt1);
+
+    const opt2 = document.createElement('option');
+    opt2.value = c.dial;
+    opt2.textContent = c.dial;
+    if (c.name === DEFAULT_COUNTRY) opt2.selected = true;
+    dialSel.appendChild(opt2);
+  });
+
+  paisSel.addEventListener('change', ()=>{
+    const country = COUNTRIES.find(c=>c.name === paisSel.value);
+    if (country) dialSel.value = country.dial;
+  });
+}
+
+/* ============================================================
+   Header con sombra al hacer scroll
+   ============================================================ */
+function initHeaderScroll(){
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', ()=>{
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive:true });
+}
+
+/* ============================================================
+   Animaciones al hacer scroll
+   ============================================================ */
+function initReveal(){
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold:0.15 });
+  items.forEach(el=> io.observe(el));
+}
+
+/* ============================================================
+   Acordeón FAQ (exclusivo)
+   ============================================================ */
+function initFaq(){
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(o=>{
+        o.classList.remove('open');
+        o.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if (!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+}
+
+/* ============================================================
+   POPUP: apertura / cierre
+   ============================================================ */
+const overlay = document.getElementById('overlay');
+let autoPopupShown = false;
+
+function openPopup(){
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  autoPopupShown = true;
+  sessionStorage.setItem('autoPopupShown', '1');
+  setTimeout(()=>{
+    const firstInput = document.getElementById('nombre');
+    if (firstInput) firstInput.focus();
+  }, 100);
+}
+
+function closePopup(){
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function initPopupTriggers(){
+  document.querySelectorAll('.js-open-popup').forEach(btn=>{
+    btn.addEventListener('click', openPopup);
+  });
+
+  document.getElementById('modalClose').addEventListener('click', closePopup);
+
+  overlay.addEventListener('click', (e)=>{
+    if (e.target === overlay) closePopup();
+  });
+
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape' && overlay.classList.contains('active')) closePopup();
+  });
+
+  // Apertura automática una sola vez por sesión: 15s o exit intent, lo que ocurra primero
+  autoPopupShown = sessionStorage.getItem('autoPopupShown') === '1';
+
+  if (!autoPopupShown){
+    const timer = setTimeout(()=>{
+      if (!autoPopupShown) openPopup();
+    }, 15000);
+
+    if (window.matchMedia('(min-width:1025px)').matches){
+      document.addEventListener('mouseleave', function exitIntent(e){
+        if (e.clientY <= 0 && !autoPopupShown){
+          clearTimeout(timer);
+          openPopup();
+          document.removeEventListener('mouseleave', exitIntent);
+        }
+      });
+    }
+  }
+}
+
+/* ============================================================
+   Validación y envío del formulario
+   ============================================================ */
+function setFieldError(fieldId, hasError){
+  const field = document.getElementById(fieldId);
+  field.classList.toggle('error', hasError);
+}
+
+function validateForm(){
+  let valid = true;
+
+  const nombre = document.getElementById('nombre').value.trim();
+  if (nombre.length < 2){ setFieldError('field-nombre', true); valid = false; }
+  else setFieldError('field-nombre', false);
+
+  const telefono = document.getElementById('telefono').value.replace(/\D/g,'');
+  if (telefono.length < 7 || telefono.length > 15){ setFieldError('field-telefono', true); valid = false; }
+  else setFieldError('field-telefono', false);
+
+  const email = document.getElementById('email').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)){ setFieldError('field-email', true); valid = false; }
+  else setFieldError('field-email', false);
+
+  const privacidad = document.getElementById('privacidad').checked;
+  const privacyRow = document.getElementById('field-privacidad');
+  privacyRow.classList.toggle('error', !privacidad);
+  if (!privacidad) valid = false;
+
+  return valid;
+}
+
+function initRealtimeValidation(){
+  ['nombre','telefono','email'].forEach(id=>{
+    document.getElementById(id).addEventListener('blur', validateForm);
+    document.getElementById(id).addEventListener('input', ()=>{
+      const fieldId = 'field-' + id;
+      if (document.getElementById(fieldId).classList.contains('error')) validateForm();
+    });
+  });
+  document.getElementById('privacidad').addEventListener('change', ()=>{
+    document.getElementById('field-privacidad').classList.remove('error');
+  });
+}
+
+function getUtmParams(){
+  const params = new URLSearchParams(window.location.search);
+  return {
+    utm_source: params.get('utm_source') || '',
+    utm_medium: params.get('utm_medium') || '',
+    utm_campaign: params.get('utm_campaign') || '',
+    utm_term: params.get('utm_term') || '',
+    utm_content: params.get('utm_content') || ''
+  };
+}
+
+/* Envía el lead al webhook configurado (Make, Zapier o Google Apps Script) */
+async function sendLead(data){
+  const response = await fetch(CONFIG.WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  if (!response.ok) throw new Error('Webhook respondió con error: ' + response.status);
+  return response;
+}
+
+function initFormSubmit(){
+  const form = document.getElementById('leadForm');
+  const submitBtn = document.getElementById('submitBtn');
+  let isSubmitting = false;
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    if (isSubmitting) return;
+    if (!validateForm()) return;
+
+    isSubmitting = true;
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    const nombre = document.getElementById('nombre').value.trim();
+    const dialCode = document.getElementById('dialCode').value;
+    const telefonoRaw = document.getElementById('telefono').value.replace(/\D/g,'');
+    const email = document.getElementById('email').value.trim();
+    const pais = document.getElementById('pais').value;
+
+    const payload = {
+      nombre,
+      telefono: `${dialCode} ${telefonoRaw}`,
+      email,
+      pais,
+      fecha_hora: new Date().toISOString(),
+      url_origen: window.location.href,
+      ...getUtmParams()
+    };
+
+    try{
+      await sendLead(payload);
+
+      if (typeof fbq === 'function') fbq('track', 'Lead');
+      if (typeof gtag === 'function') gtag('event', 'generate_lead');
+
+      document.getElementById('thankyouTitle').textContent = `¡Gracias, ${nombre.split(' ')[0]}!`;
+      const waMsg = `Hola, soy ${nombre}. Acabo de registrarme para el diagnóstico gratuito.`;
+      document.getElementById('waContinue').href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
+
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('thankyouView').classList.add('active');
+    }catch(err){
+      alert('No pudimos enviar tus datos. Intenta de nuevo o escríbenos directamente por WhatsApp.');
+      console.error(err);
+    }finally{
+      isSubmitting = false;
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  });
+}
+
+/* Reinicia el popup a su estado inicial cada vez que se cierra, para una próxima apertura limpia */
+function resetPopupOnClose(){
+  const observer = new MutationObserver(()=>{
+    if (!overlay.classList.contains('active')){
+      setTimeout(()=>{
+        document.getElementById('leadForm').reset();
+        document.getElementById('formView').style.display = '';
+        document.getElementById('thankyouView').classList.remove('active');
+        document.querySelectorAll('.field.error, .checkbox-row.error').forEach(f=> f.classList.remove('error'));
+        const country = COUNTRIES.find(c=>c.name === DEFAULT_COUNTRY);
+        if (country){
+          document.getElementById('pais').value = DEFAULT_COUNTRY;
+          document.getElementById('dialCode').value = country.dial;
+        }
+      }, 300);
+    }
+  });
+  observer.observe(overlay, { attributes:true, attributeFilter:['class'] });
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  applyConfig();
+  populateCountrySelects();
+  initHeaderScroll();
+  initReveal();
+  initFaq();
+  initPopupTriggers();
+  initRealtimeValidation();
+  initFormSubmit();
+  resetPopupOnClose();
+});
+</script>
+
+<!-- ============================================================
+   EJEMPLO: Google Apps Script para recibir leads en Google Sheets
+   ============================================================
+   1. Crea una Google Sheet nueva.
+   2. Ve a Extensiones > Apps Script y pega este código.
+   3. Publica como aplicación web (Implementar > Nueva implementación >
+      Aplicación web), acceso "Cualquier usuario", y copia la URL generada.
+   4. Pega esa URL en CONFIG.WEBHOOK_URL, arriba en este archivo.
+
+function doPost(e) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    new Date(),
+    data.nombre || "",
+    data.telefono || "",
+    data.email || "",
+    data.pais || "",
+    data.url_origen || "",
+    data.utm_source || "",
+    data.utm_medium || "",
+    data.utm_campaign || "",
+    data.utm_term || "",
+    data.utm_content || ""
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ result: "ok" }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+   ============================================================ -->
+</body>
+</html>
