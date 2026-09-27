@@ -190,6 +190,26 @@ header .container{display:flex;align-items:center;justify-content:space-between;
 .testi-head span{color:var(--text-muted);font-size:13px}
 .card blockquote{color:var(--text);font-size:15px;font-style:italic}
 
+/* ---------- sobre mi ---------- */
+.sobre-mi-inner{display:flex;gap:36px;align-items:center}
+.sobre-mi-photo{
+  width:120px;height:120px;border-radius:50%;flex-shrink:0;
+  background:var(--surface-2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-head);font-size:34px;font-weight:800;color:var(--accent);
+}
+.sobre-mi-text h3{font-size:21px;margin-bottom:12px}
+.sobre-mi-text p{color:var(--text-muted);font-size:15.5px;max-width:660px}
+.sobre-mi-badges{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.sobre-mi-badges span{
+  font-size:12.5px;font-weight:600;background:rgba(255,106,61,.1);
+  color:var(--accent-light);padding:7px 14px;border-radius:999px;
+}
+@media(max-width:640px){
+  .sobre-mi-inner{flex-direction:column;text-align:center}
+  .sobre-mi-badges{justify-content:center}
+}
+
 /* ---------- para quien es / no es ---------- */
 .filtro-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .filtro-card{border-radius:var(--radius);padding:32px;border:1px solid var(--border)}
@@ -357,7 +377,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
   <div class="container hero-inner">
     <span class="eyebrow">Captación predecible para negocios que quieren crecer</span>
     <h1>Llena tu agenda de <span class="accent">clientes potenciales</span> con campañas que sí convierten</h1>
-    <p class="lead">Diseñamos, gestionamos y optimizamos tus campañas en Meta Ads y Google Ads para transformar tu inversión publicitaria en clientes calificados, cada semana.</p>
+    <p class="lead">Diseñamos, gestionamos y optimizamos tus campañas en Meta Ads, Google Ads y TikTok Ads para transformar tu inversión publicitaria en clientes calificados, cada semana.</p>
     <div class="hero-cta-row">
       <button class="btn btn-primary js-open-popup">Quiero más clientes</button>
       <span class="trust-note">
@@ -540,6 +560,29 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
 </section>
 
 <!-- ============================================================
+     7.5 SOBRE MÍ
+     ============================================================ -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow reveal">Sobre mí</span>
+    <div class="card reveal">
+      <div class="sobre-mi-inner">
+        <div class="sobre-mi-photo">[FOTO]</div>
+        <div class="sobre-mi-text">
+          <h3>Hola, soy [Tu Nombre], especialista en gestión de tráfico pago</h3>
+          <p>Ayudo a negocios a dejar de adivinar con su publicidad y empezar a tomar decisiones basadas en datos. Trabajo cada cuenta como si fuera propia: mi meta es que cada peso que inviertas en anuncios vuelva multiplicado.</p>
+          <div class="sobre-mi-badges">
+            <span>[Certificación Meta Ads]</span>
+            <span>[Certificación Google Ads]</span>
+            <span>[+X años de experiencia]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      8. PARA QUIÉN ES / NO ES
      ============================================================ -->
 <section class="section problema">
@@ -601,7 +644,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">¿En qué plataformas pautan? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Principalmente Meta Ads (Facebook e Instagram). Según tu negocio, también incorporamos Google Ads para captar búsquedas con intención directa.</p></div>
+        <div class="faq-a"><p>Principalmente Meta Ads (Facebook e Instagram). Según tu negocio, también incorporamos Google Ads para captar búsquedas con intención directa, y TikTok Ads cuando el público objetivo está ahí.</p></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q">¿Cómo se miden los resultados? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
