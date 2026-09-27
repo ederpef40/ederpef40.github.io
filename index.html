@@ -108,8 +108,12 @@ header{
   transition:border-color .2s ease, background .2s ease;
 }
 header.scrolled{border-color:var(--border);background:rgba(10,14,20,.92)}
-header .container{display:flex;align-items:center;justify-content:space-between;height:76px}
-.logo{font-family:var(--font-head);font-weight:800;font-size:20px;letter-spacing:-.02em}
+header .container{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:76px;padding-top:12px;padding-bottom:12px}
+.logo{font-family:var(--font-head);font-weight:800;font-size:20px;letter-spacing:-.02em;line-height:1.2}
+@media(max-width:480px){
+  .logo{font-size:15px}
+  header .btn-sm{padding:9px 14px;font-size:13px;flex-shrink:0}
+}
 
 /* ---------- hero ---------- */
 .hero{padding:180px 0 80px;position:relative}
@@ -783,7 +787,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
    BLOQUE DE CONFIGURACIÓN — EDITA AQUÍ ANTES DE PUBLICAR
    ============================================================ */
 const CONFIG = {
-  BRAND_NAME: "Eder P",
+  BRAND_NAME: "Impulsa Ventas - Eder Ads",
   WHATSAPP_NUMBER: "573001234567", // solo dígitos, con código de país, sin '+' ni espacios
   WEBHOOK_URL: "https://TU-WEBHOOK-AQUI.com/endpoint", // Make, Zapier o Google Apps Script (ver ejemplo al final de este script)
   metrics: {
