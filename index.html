@@ -179,6 +179,58 @@ header .container{display:flex;align-items:center;justify-content:space-between;
 .result-card b{font-family:var(--font-head);font-size:36px;font-weight:800;color:var(--accent);display:block;margin-bottom:6px}
 .result-card span{color:var(--text-muted);font-size:14px}
 
+.mock-dashboard{
+  border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);
+  box-shadow:var(--shadow);background:var(--surface);
+}
+.mock-topbar{
+  display:flex;align-items:center;gap:8px;padding:12px 16px;
+  background:var(--surface-2);border-bottom:1px solid var(--border);
+}
+.mock-dot{width:10px;height:10px;border-radius:50%}
+.mock-dot.red{background:#ff5f57}
+.mock-dot.yellow{background:#febc2e}
+.mock-dot.green{background:#28c840}
+.mock-url{
+  margin-left:12px;font-size:12px;color:var(--text-muted);
+  background:var(--bg-soft);padding:4px 10px;border-radius:6px;
+}
+.mock-body{padding:28px}
+.mock-campaign-row{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:24px;flex-wrap:wrap;gap:10px;
+}
+.mock-campaign-name{display:block;font-weight:700;font-size:16px}
+.mock-campaign-sub{display:block;color:var(--text-muted);font-size:13px;margin-top:2px}
+.mock-status{
+  font-size:12.5px;color:var(--ok);font-weight:600;
+  background:rgba(34,197,94,.12);padding:5px 12px;border-radius:999px;flex-shrink:0;
+}
+.mock-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.mock-stat{
+  background:var(--bg-soft);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:16px;text-align:center;
+}
+.mock-stat b{display:block;font-family:var(--font-head);font-size:26px;font-weight:800;color:var(--accent)}
+.mock-stat span{color:var(--text-muted);font-size:12.5px}
+.mock-chart{background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 16px 10px}
+.mock-chart svg{width:100%;height:auto;display:block}
+.chart-axis{stroke:var(--border);stroke-width:1}
+.chart-bar{fill:var(--accent);opacity:.55}
+.chart-bar:nth-child(2){opacity:.6}
+.chart-bar:nth-child(3){opacity:.65}
+.chart-bar:nth-child(4){opacity:.7}
+.chart-bar:nth-child(5){opacity:.75}
+.chart-bar:nth-child(6){opacity:.85}
+.chart-bar:nth-child(7){opacity:.92}
+.chart-bar:nth-child(8){opacity:1}
+.chart-trend{fill:none;stroke:var(--accent-light);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.mock-chart-labels{display:flex;justify-content:space-between;color:var(--text-muted);font-size:11.5px;margin-top:6px}
+@media(max-width:640px){
+  .mock-body{padding:20px}
+  .mock-stats{grid-template-columns:1fr}
+}
+
 /* ---------- testimonios ---------- */
 .avatar{
   width:48px;height:48px;border-radius:50%;background:var(--surface-2);
@@ -509,22 +561,54 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
 <section class="section resultados">
   <div class="container">
     <span class="eyebrow reveal">Resultados</span>
-    <h2 class="title reveal" style="margin-bottom:40px">Números que respaldan el proceso</h2>
-    <div class="grid grid-3">
-      <div class="card result-card reveal">
-        <b data-cfg="results.0.value">[$0,00]</b>
-        <span data-cfg="results.0.label">Costo por lead promedio</span>
+    <h2 class="title reveal" style="margin-bottom:16px">Así se ve el progreso de una campaña</h2>
+    <p class="lead reveal" style="margin-bottom:40px">Panel ilustrativo del tipo de reporte que recibirás. No corresponde a una cuenta real.</p>
+
+    <div class="mock-dashboard reveal">
+      <div class="mock-topbar">
+        <span class="mock-dot red"></span><span class="mock-dot yellow"></span><span class="mock-dot green"></span>
+        <span class="mock-url">adsmanager.meta.com/campañas</span>
       </div>
-      <div class="card result-card reveal">
-        <b data-cfg="results.1.value">[000]</b>
-        <span data-cfg="results.1.label">Leads generados en 30 días</span>
-      </div>
-      <div class="card result-card reveal">
-        <b data-cfg="results.2.value">[0.0x]</b>
-        <span data-cfg="results.2.label">Retorno estimado</span>
+      <div class="mock-body">
+        <div class="mock-campaign-row">
+          <div>
+            <span class="mock-campaign-name">Campaña — Generación de leads</span>
+            <span class="mock-campaign-sub">Meta Ads · Últimos 30 días · Ejemplo ilustrativo</span>
+          </div>
+          <span class="mock-status">● Activa</span>
+        </div>
+        <div class="mock-stats">
+          <div class="mock-stat">
+            <b data-cfg="results.0.value">$4.80</b>
+            <span data-cfg="results.0.label">Costo por lead</span>
+          </div>
+          <div class="mock-stat">
+            <b data-cfg="results.1.value">480</b>
+            <span data-cfg="results.1.label">Leads generados</span>
+          </div>
+          <div class="mock-stat">
+            <b data-cfg="results.2.value">4.5x</b>
+            <span data-cfg="results.2.label">Retorno (ROAS)</span>
+          </div>
+        </div>
+        <div class="mock-chart">
+          <svg viewBox="0 0 600 170" preserveAspectRatio="none" role="img" aria-label="Gráfico ilustrativo de tendencia de leads a lo largo de 8 semanas">
+            <line x1="0" y1="140" x2="600" y2="140" class="chart-axis"/>
+            <rect class="chart-bar" x="10"  y="100" width="44" height="40" rx="4"/>
+            <rect class="chart-bar" x="80"  y="85"  width="44" height="55" rx="4"/>
+            <rect class="chart-bar" x="150" y="90"  width="44" height="50" rx="4"/>
+            <rect class="chart-bar" x="220" y="70"  width="44" height="70" rx="4"/>
+            <rect class="chart-bar" x="290" y="75"  width="44" height="65" rx="4"/>
+            <rect class="chart-bar" x="360" y="50"  width="44" height="90" rx="4"/>
+            <rect class="chart-bar" x="430" y="55"  width="44" height="85" rx="4"/>
+            <rect class="chart-bar" x="500" y="30"  width="44" height="110" rx="4"/>
+            <polyline points="32,100 102,85 172,90 242,70 312,75 382,50 452,55 522,30" class="chart-trend"/>
+          </svg>
+          <div class="mock-chart-labels"><span>Semana 1</span><span>Semana 8</span></div>
+        </div>
       </div>
     </div>
-    <p class="form-note" style="text-align:left;margin-top:16px">*Cifras de ejemplo. Reemplaza con las métricas reales de tus campañas antes de publicar.</p>
+    <p class="form-note" style="text-align:left;margin-top:16px">*Panel ilustrativo con datos de ejemplo, creado para mostrar el formato del reporte. No es una captura real de ninguna cuenta.</p>
   </div>
 </section>
 
@@ -790,9 +874,9 @@ const CONFIG = {
     budget: "$1.2M+"
   },
   results: [
-    { label: "Costo por lead promedio", value: "$4.80" },
-    { label: "Leads generados en 30 días", value: "480" },
-    { label: "Retorno estimado", value: "4.5x" }
+    { label: "Costo por lead", value: "$4.80" },
+    { label: "Leads generados", value: "480" },
+    { label: "Retorno (ROAS)", value: "4.5x" }
   ]
 };
 
