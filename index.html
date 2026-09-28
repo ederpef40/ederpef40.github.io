@@ -82,7 +82,7 @@ h1,h2,h3,h4{font-family:var(--font-head);line-height:1.15;letter-spacing:-.01em}
   letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;
 }
 .eyebrow::before{content:"";width:8px;height:8px;background:var(--accent);border-radius:2px}
-h2.title{font-size:clamp(28px,4vw,42px);font-weight:800;margin-bottom:16px}
+h2.title{font-size:clamp(30px,7vw,42px);font-weight:800;margin-bottom:16px}
 p.lead{color:var(--text-muted);font-size:18px;max-width:640px}
 
 /* ---------- botones ---------- */
@@ -108,11 +108,18 @@ header{
   transition:border-color .2s ease, background .2s ease;
 }
 header.scrolled{border-color:var(--border);background:rgba(10,14,20,.92)}
-header .container{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:76px;padding-top:12px;padding-bottom:12px}
+header .container{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;row-gap:8px;min-height:76px;padding-top:12px;padding-bottom:12px}
 .logo{font-family:var(--font-head);font-weight:800;font-size:20px;letter-spacing:-.02em;line-height:1.2}
+.header-actions{display:flex;align-items:center;gap:10px}
+.lang-switch{display:flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px;flex-shrink:0}
+.lang-btn{width:30px;height:30px;border-radius:50%;background:none;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;opacity:.5;transition:opacity .15s ease, background .15s ease}
+.lang-btn.active{opacity:1;background:var(--surface-2)}
+.lang-btn:hover{opacity:1}
 @media(max-width:480px){
   .logo{font-size:15px}
   header .btn-sm{padding:9px 14px;font-size:13px;flex-shrink:0}
+  .lang-btn{width:26px;height:26px;font-size:14px}
+  .lang-switch{padding:3px}
 }
 
 /* ---------- hero ---------- */
@@ -245,7 +252,7 @@ header .container{display:flex;align-items:center;justify-content:space-between;
 
 /* ---------- cta final ---------- */
 .cta-final{text-align:center;background:var(--bg-soft)}
-.cta-final h2{font-size:clamp(28px,4.2vw,44px);max-width:760px;margin:0 auto 16px}
+.cta-final h2{font-size:clamp(30px,7vw,44px);max-width:760px;margin:0 auto 16px}
 .cta-final p.lead{margin:0 auto 32px}
 .badge-urgente{
   display:inline-flex;align-items:center;gap:8px;background:rgba(255,106,61,.12);
@@ -348,6 +355,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
   .section{padding:64px 0}
   .hero{padding:140px 0 56px}
   .steps{grid-template-columns:1fr}
+  .grid-4{grid-template-columns:1fr}
   .footer-top{flex-direction:column}
   .stats{gap:16px}
   .stat b{font-size:22px}
@@ -362,7 +370,13 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
 <header id="siteHeader">
   <div class="container">
     <span class="logo js-brand">[NOMBRE DE LA MARCA]</span>
-    <button class="btn btn-primary btn-sm js-open-popup">Quiero más clientes</button>
+    <div class="header-actions">
+      <div class="lang-switch" role="group" aria-label="Idioma / Language">
+        <button type="button" class="lang-btn active" data-lang="es" aria-label="Español">🇪🇸</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English">🇺🇸</button>
+      </div>
+      <button class="btn btn-primary btn-sm js-open-popup" data-i18n="header.cta">Quiero más clientes</button>
+    </div>
   </div>
 </header>
 
@@ -371,20 +385,20 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="hero">
   <div class="container hero-inner">
-    <span class="eyebrow">Captación predecible para negocios que quieren crecer</span>
-    <h1>Llena tu agenda de <span class="accent">clientes potenciales</span> con campañas que sí convierten</h1>
-    <p class="lead">Diseñamos, gestionamos y optimizamos tus campañas en Meta Ads, Google Ads y TikTok Ads para transformar tu inversión publicitaria en clientes calificados, cada semana.</p>
+    <span class="eyebrow" data-i18n="hero.eyebrow">Captación predecible para negocios que quieren crecer</span>
+    <h1 data-i18n-html="hero.h1">Llena tu agenda de <span class="accent">clientes potenciales</span> con campañas que sí convierten</h1>
+    <p class="lead" data-i18n="hero.lead">Diseñamos, gestionamos y optimizamos tus campañas en Meta Ads, Google Ads y TikTok Ads para transformar tu inversión publicitaria en clientes calificados, cada semana.</p>
     <div class="hero-cta-row">
-      <button class="btn btn-primary js-open-popup">Quiero más clientes</button>
+      <button class="btn btn-primary js-open-popup" data-i18n="header.cta">Quiero más clientes</button>
       <span class="trust-note">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"/></svg>
-        Diagnóstico inicial sin costo
+        <span data-i18n="hero.trust">Diagnóstico inicial sin costo</span>
       </span>
     </div>
     <div class="stats">
-      <div class="stat"><b data-cfg="metrics.campaigns">[+00]</b><span>Campañas gestionadas</span></div>
-      <div class="stat"><b data-cfg="metrics.leads">[+0.000]</b><span>Leads generados</span></div>
-      <div class="stat"><b data-cfg="metrics.budget">[$000K]</b><span>Inversión administrada</span></div>
+      <div class="stat"><b data-cfg="metrics.campaigns">[+00]</b><span data-i18n="hero.stat_campaigns">Campañas gestionadas</span></div>
+      <div class="stat"><b data-cfg="metrics.leads">[+0.000]</b><span data-i18n="hero.stat_leads">Leads generados</span></div>
+      <div class="stat"><b data-cfg="metrics.budget">[$000K]</b><span data-i18n="hero.stat_budget">Inversión administrada</span></div>
     </div>
   </div>
 </section>
@@ -394,29 +408,29 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section problema">
   <div class="container">
-    <span class="eyebrow reveal">El problema</span>
-    <h2 class="title reveal">Invertir tiempo sin un sistema de captación cuesta más de lo que parece</h2>
-    <p class="lead reveal" style="margin-bottom:40px">Si te identificas con alguno de estos escenarios, no necesitas publicar más. Necesitas una estrategia medible.</p>
+    <span class="eyebrow reveal" data-i18n="problem.eyebrow">El problema</span>
+    <h2 class="title reveal" data-i18n="problem.title">Invertir tiempo sin un sistema de captación cuesta más de lo que parece</h2>
+    <p class="lead reveal" style="margin-bottom:40px" data-i18n="problem.lead">Si te identificas con alguno de estos escenarios, no necesitas publicar más. Necesitas una estrategia medible.</p>
     <div class="grid grid-4">
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8 13 21l3-2-2.5-4.5"/></svg></div>
-        <h3>Publicas, pero no vendes</h3>
-        <p>Hay actividad en redes, pero no conversaciones comerciales constantes.</p>
+        <h3 data-i18n="problem.card1.title">Publicas, pero no vendes</h3>
+        <p data-i18n="problem.card1.text">Hay actividad en redes, pero no conversaciones comerciales constantes.</p>
       </div>
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="3"/></svg></div>
-        <h3>Dependes del voz a voz</h3>
-        <p>Tus referidos funcionan, pero no puedes predecir cuándo llegará el próximo cliente.</p>
+        <h3 data-i18n="problem.card2.title">Dependes del voz a voz</h3>
+        <p data-i18n="problem.card2.text">Tus referidos funcionan, pero no puedes predecir cuándo llegará el próximo cliente.</p>
       </div>
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <h3>Ya gastaste sin resultados</h3>
-        <p>Invertiste en anuncios sin claridad sobre qué funcionó ni por qué.</p>
+        <h3 data-i18n="problem.card3.title">Ya gastaste sin resultados</h3>
+        <p data-i18n="problem.card3.text">Invertiste en anuncios sin claridad sobre qué funcionó ni por qué.</p>
       </div>
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></div>
-        <h3>No conoces tus números</h3>
-        <p>No sabes cuánto cuesta generar una oportunidad o cerrar una venta.</p>
+        <h3 data-i18n="problem.card4.title">No conoces tus números</h3>
+        <p data-i18n="problem.card4.text">No sabes cuánto cuesta generar una oportunidad o cerrar una venta.</p>
       </div>
     </div>
   </div>
@@ -427,39 +441,39 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section">
   <div class="container">
-    <span class="eyebrow reveal">Qué hacemos</span>
-    <h2 class="title reveal">Un sistema de captación, no un anuncio suelto</h2>
-    <p class="lead reveal" style="margin-bottom:40px">Nos encargamos de todo el proceso para que tengas clientes potenciales de forma constante.</p>
+    <span class="eyebrow reveal" data-i18n="solution.eyebrow">Qué hacemos</span>
+    <h2 class="title reveal" data-i18n="solution.title">Un sistema de captación, no un anuncio suelto</h2>
+    <p class="lead reveal" style="margin-bottom:40px" data-i18n="solution.lead">Nos encargamos de todo el proceso para que tengas clientes potenciales de forma constante.</p>
     <div class="grid grid-3">
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div>
-        <h3>Estrategia a la medida</h3>
-        <p>Un plan basado en tu oferta, tu margen y tu proceso comercial.</p>
+        <h3 data-i18n="solution.card1.title">Estrategia a la medida</h3>
+        <p data-i18n="solution.card1.text">Un plan basado en tu oferta, tu margen y tu proceso comercial.</p>
       </div>
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg></div>
-        <h3>Dirección de anuncios</h3>
-        <p>Definimos el mensaje y la estructura de cada anuncio. Tú aportas los creativos (fotos o videos) y los adaptamos a la estrategia.</p>
+        <h3 data-i18n="solution.card2.title">Dirección de anuncios</h3>
+        <p data-i18n="solution.card2.text">Definimos el mensaje y la estructura de cada anuncio. Tú aportas los creativos (fotos o videos) y los adaptamos a la estrategia.</p>
       </div>
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></svg></div>
-        <h3>Segmentación estratégica</h3>
-        <p>Buscamos llegar a las audiencias con mayor probabilidad de interés real, y ajustamos según el desempeño de cada campaña.</p>
+        <h3 data-i18n="solution.card3.title">Segmentación estratégica</h3>
+        <p data-i18n="solution.card3.text">Buscamos llegar a las audiencias con mayor probabilidad de interés real, y ajustamos según el desempeño de cada campaña.</p>
       </div>
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="6" rx="1"/><rect x="4" y="14" width="16" height="6" rx="1"/></svg></div>
-        <h3>Landing y embudo</h3>
-        <p>Una ruta simple que convierte clics en oportunidades comerciales.</p>
+        <h3 data-i18n="solution.card4.title">Landing y embudo</h3>
+        <p data-i18n="solution.card4.text">Una ruta simple que convierte clics en oportunidades comerciales.</p>
       </div>
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/></svg></div>
-        <h3>Optimización semanal</h3>
-        <p>Revisamos datos cada 7 días y ajustamos para reducir desperdicio de presupuesto.</p>
+        <h3 data-i18n="solution.card5.title">Optimización semanal</h3>
+        <p data-i18n="solution.card5.text">Revisamos datos cada 7 días y ajustamos para reducir desperdicio de presupuesto.</p>
       </div>
       <div class="card reveal">
         <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V9M12 19V5M20 19v-7"/></svg></div>
-        <h3>Reportes claros</h3>
-        <p>Sabes cuánto inviertes, cuántos leads llegan y cuánto cuesta cada uno.</p>
+        <h3 data-i18n="solution.card6.title">Reportes claros</h3>
+        <p data-i18n="solution.card6.text">Sabes cuánto inviertes, cuántos leads llegan y cuánto cuesta cada uno.</p>
       </div>
     </div>
   </div>
@@ -470,28 +484,28 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section problema">
   <div class="container">
-    <span class="eyebrow reveal">Nuestro método</span>
-    <h2 class="title reveal" style="margin-bottom:48px">De la estrategia al crecimiento, sin improvisar</h2>
+    <span class="eyebrow reveal" data-i18n="method.eyebrow">Nuestro método</span>
+    <h2 class="title reveal" style="margin-bottom:48px" data-i18n="method.title">De la estrategia al crecimiento, sin improvisar</h2>
     <div class="steps">
       <div class="step reveal">
         <div class="num">1</div>
-        <h3>Diagnóstico</h3>
-        <p>Analizamos tu negocio, tu mercado y tu competencia para identificar oportunidades reales.</p>
+        <h3 data-i18n="method.step1.title">Diagnóstico</h3>
+        <p data-i18n="method.step1.text">Analizamos tu negocio, tu mercado y tu competencia para identificar oportunidades reales.</p>
       </div>
       <div class="step reveal">
         <div class="num">2</div>
-        <h3>Estrategia</h3>
-        <p>Diseñamos el plan de campañas, mensajes y segmentación enfocado en resultados medibles.</p>
+        <h3 data-i18n="method.step2.title">Estrategia</h3>
+        <p data-i18n="method.step2.text">Diseñamos el plan de campañas, mensajes y segmentación enfocado en resultados medibles.</p>
       </div>
       <div class="step reveal">
         <div class="num">3</div>
-        <h3>Lanzamiento</h3>
-        <p>Creamos y activamos tus campañas, con seguimiento desde el primer día.</p>
+        <h3 data-i18n="method.step3.title">Lanzamiento</h3>
+        <p data-i18n="method.step3.text">Creamos y activamos tus campañas, con seguimiento desde el primer día.</p>
       </div>
       <div class="step reveal">
         <div class="num">4</div>
-        <h3>Optimización y escala</h3>
-        <p>Ajustamos cada semana para bajar el costo por cliente y escalar lo que funciona.</p>
+        <h3 data-i18n="method.step4.title">Optimización y escala</h3>
+        <p data-i18n="method.step4.text">Ajustamos cada semana para bajar el costo por cliente y escalar lo que funciona.</p>
       </div>
     </div>
   </div>
@@ -502,9 +516,9 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section resultados">
   <div class="container">
-    <span class="eyebrow reveal">Resultados</span>
-    <h2 class="title reveal" style="margin-bottom:16px">Capturas reales de cuentas gestionadas</h2>
-    <p class="lead reveal" style="margin-bottom:40px">Directo del Administrador de Anuncios — sin editar, sin inventar cifras.</p>
+    <span class="eyebrow reveal" data-i18n="results.eyebrow">Resultados</span>
+    <h2 class="title reveal" style="margin-bottom:16px" data-i18n="results.title">Capturas reales de cuentas gestionadas</h2>
+    <p class="lead reveal" style="margin-bottom:40px" data-i18n="results.lead">Directo del Administrador de Anuncios — sin editar, sin inventar cifras.</p>
 
     <div class="grid grid-3">
       <div class="card result-shot reveal">
@@ -529,7 +543,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
         </div>
       </div>
     </div>
-    <p class="form-note" style="text-align:left;margin-top:16px">*Capturas reales de cuentas gestionadas por <span class="js-brand">[NOMBRE DE LA MARCA]</span>. Los resultados varían según negocio, mercado e inversión.</p>
+    <p class="form-note" style="text-align:left;margin-top:16px"><span data-i18n="results.footnote_pre">*Capturas reales de cuentas gestionadas por</span> <span class="js-brand">[NOMBRE DE LA MARCA]</span>. <span data-i18n="results.footnote_post">Los resultados varían según negocio, mercado e inversión.</span></p>
   </div>
 </section>
 
@@ -538,29 +552,29 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section">
   <div class="container">
-    <span class="eyebrow reveal">Prueba social</span>
-    <h2 class="title reveal" style="margin-bottom:40px">Negocios que dejaron de depender de la suerte</h2>
+    <span class="eyebrow reveal" data-i18n="testi.eyebrow">Prueba social</span>
+    <h2 class="title reveal" style="margin-bottom:40px" data-i18n="testi.title">Negocios que dejaron de depender de la suerte</h2>
     <div class="grid grid-3">
       <div class="card reveal">
         <div class="testi-head">
           <div class="avatar"><img src="images/neifer-figueroa.jpg" alt="Dr. Neifer Figueroa" loading="lazy"></div>
-          <div><b>Dr. Neifer Figueroa</b><span>Cirujano Plástico</span></div>
+          <div><b>Dr. Neifer Figueroa</b><span data-i18n="testi.card1.role">Cirujano Plástico</span></div>
         </div>
-        <blockquote>"He pasado bastante tiempo buscando un trafficker digital que primero me generara confianza y, segundo, que supiera administrar mis recursos. Con Eder todo ha funcionado: su experiencia y profesionalismo son excelentes."</blockquote>
+        <blockquote data-i18n="testi.card1.quote">"He pasado bastante tiempo buscando un trafficker digital que primero me generara confianza y, segundo, que supiera administrar mis recursos. Con Eder todo ha funcionado: su experiencia y profesionalismo son excelentes."</blockquote>
       </div>
       <div class="card reveal">
         <div class="testi-head">
           <div class="avatar"><img src="images/isabel-gimenez.jpg" alt="Dra. Isabel Giménez" loading="lazy"></div>
-          <div><b>Dra. Isabel Giménez</b><span>Otorrino · Cirujana Plástica de Cara y Cuello</span></div>
+          <div><b>Dra. Isabel Giménez</b><span data-i18n="testi.card2.role">Otorrino · Cirujana Plástica de Cara y Cuello</span></div>
         </div>
-        <blockquote>"Desde que Eder maneja mis pautas digitales, los prospectos potenciales han empezado a llegar. Como todo toma tiempo, he visto su constancia y esfuerzo para atraer mayor volumen de ventas a mi cuenta. Lo recomiendo."</blockquote>
+        <blockquote data-i18n="testi.card2.quote">"Desde que Eder maneja mis pautas digitales, los prospectos potenciales han empezado a llegar. Como todo toma tiempo, he visto su constancia y esfuerzo para atraer mayor volumen de ventas a mi cuenta. Lo recomiendo."</blockquote>
       </div>
       <div class="card reveal">
         <div class="testi-head">
           <div class="avatar"><img src="images/javier-araujo.jpg" alt="Javier Araujo" loading="lazy"></div>
-          <div><b>Javier Araujo</b><span>Ingeniero Mecánico · Taller de reparación y diagnóstico</span></div>
+          <div><b>Javier Araujo</b><span data-i18n="testi.card3.role">Ingeniero Mecánico · Taller de reparación y diagnóstico</span></div>
         </div>
-        <blockquote>"Antes desconfiaba de cualquier cosa digital para atraer clientes, pero Eder me explicó en detalle la manera de hacerlo. Desde entonces ha crecido mi negocio en ventas. Lo recomiendo."</blockquote>
+        <blockquote data-i18n="testi.card3.quote">"Antes desconfiaba de cualquier cosa digital para atraer clientes, pero Eder me explicó en detalle la manera de hacerlo. Desde entonces ha crecido mi negocio en ventas. Lo recomiendo."</blockquote>
       </div>
     </div>
   </div>
@@ -571,13 +585,13 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section">
   <div class="container">
-    <span class="eyebrow reveal">Sobre mí</span>
+    <span class="eyebrow reveal" data-i18n="about.eyebrow">Sobre mí</span>
     <div class="card reveal">
       <div class="sobre-mi-inner">
         <div class="sobre-mi-photo"><img src="images/eder-p.jpg" alt="Eder P" loading="lazy"></div>
         <div class="sobre-mi-text">
-          <h3>Hola, soy Eder P, especialista en creación y gestión de campañas de tráfico digital</h3>
-          <p>Ayudo a negocios y profesionales independientes a atraer más clientes potenciales, con campañas bien segmentadas y optimizadas semana a semana. Reviso cada cuenta de cerca, ajusto lo que no funciona y me enfoco en un solo objetivo: que tu inversión en anuncios se traduzca en clientes reales.</p>
+          <h3 data-i18n="about.title">Hola, soy Eder P, especialista en creación y gestión de campañas de tráfico digital</h3>
+          <p data-i18n="about.text">Ayudo a negocios y profesionales independientes a atraer más clientes potenciales, con campañas bien segmentadas y optimizadas semana a semana. Reviso cada cuenta de cerca, ajusto lo que no funciona y me enfoco en un solo objetivo: que tu inversión en anuncios se traduzca en clientes reales.</p>
         </div>
       </div>
     </div>
@@ -589,24 +603,24 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section problema">
   <div class="container">
-    <span class="eyebrow reveal">¿Es para ti?</span>
-    <h2 class="title reveal" style="margin-bottom:40px">Trabajamos mejor con negocios que cumplen esto</h2>
+    <span class="eyebrow reveal" data-i18n="filtro.eyebrow">¿Es para ti?</span>
+    <h2 class="title reveal" style="margin-bottom:40px" data-i18n="filtro.title">Trabajamos mejor con negocios que cumplen esto</h2>
     <div class="filtro-grid">
       <div class="filtro-card si reveal">
-        <h3>Es para ti si...</h3>
+        <h3 data-i18n="filtro.si.title">Es para ti si...</h3>
         <ul>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Tienes un negocio de servicios o productos ya establecidos.</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Quieres un sistema predecible de clientes, no un anuncio suelto.</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Estás dispuesto a invertir en publicidad de forma constante.</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Buscas datos claros para tomar decisiones.</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="filtro.si.li1">Tienes un negocio de servicios o productos ya establecidos.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="filtro.si.li2">Quieres un sistema predecible de clientes, no un anuncio suelto.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="filtro.si.li3">Estás dispuesto a invertir en publicidad de forma constante.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> <span data-i18n="filtro.si.li4">Buscas datos claros para tomar decisiones.</span></li>
         </ul>
       </div>
       <div class="filtro-card no reveal">
-        <h3>No es para ti si...</h3>
+        <h3 data-i18n="filtro.no.title">No es para ti si...</h3>
         <ul>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Buscas resultados de la noche a la mañana sin invertir.</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> No tienes capacidad de atender más clientes por ahora.</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Buscas la opción más barata sin importar el resultado.</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> <span data-i18n="filtro.no.li1">Buscas resultados de la noche a la mañana sin invertir.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> <span data-i18n="filtro.no.li2">No tienes capacidad de atender más clientes por ahora.</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> <span data-i18n="filtro.no.li3">Buscas la opción más barata sin importar el resultado.</span></li>
         </ul>
       </div>
     </div>
@@ -621,8 +635,8 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
     <div class="garantia reveal">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg>
       <div>
-        <h3>Trabajo transparente, sin humo</h3>
-        <p>Tendrás acceso a reportes claros y visibilidad total sobre tu inversión. <b>Sin contratos que te amarren a largo plazo.</b> No hay permanencia mínima; eso sí, los resultados sólidos suelen verse a partir del segundo mes.</p>
+        <h3 data-i18n="guarantee.title">Trabajo transparente, sin humo</h3>
+        <p data-i18n-html="guarantee.text">Tendrás acceso a reportes claros y visibilidad total sobre tu inversión. <b>Sin contratos que te amarren a largo plazo.</b> No hay permanencia mínima; eso sí, los resultados sólidos suelen verse a partir del segundo mes.</p>
       </div>
     </div>
   </div>
@@ -633,28 +647,28 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section problema">
   <div class="container" style="max-width:820px">
-    <span class="eyebrow reveal">Preguntas frecuentes</span>
-    <h2 class="title reveal" style="margin-bottom:32px">Lo que necesitas saber antes de empezar</h2>
+    <span class="eyebrow reveal" data-i18n="faq.eyebrow">Preguntas frecuentes</span>
+    <h2 class="title reveal" style="margin-bottom:32px" data-i18n="faq.title">Lo que necesitas saber antes de empezar</h2>
     <div class="faq-list">
       <div class="faq-item reveal">
-        <button class="faq-q">¿Cuál es la inversión mínima en publicidad? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Depende del mercado, el ticket promedio y la zona geográfica. En el diagnóstico definimos un punto de partida responsable según tus objetivos.</p></div>
+        <button class="faq-q"><span data-i18n="faq.q1.q">¿Cuál es la inversión mínima en publicidad?</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq.q1.a">Depende del mercado, el ticket promedio y la zona geográfica. En el diagnóstico definimos un punto de partida responsable según tus objetivos.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">¿Cuánto tiempo tarda en ver resultados? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Los primeros datos de aprendizaje llegan en la primera semana. La optimización real de costo por lead suele estabilizarse entre la 3ª y 4ª semana.</p></div>
+        <button class="faq-q"><span data-i18n="faq.q2.q">¿Cuánto tiempo tarda en ver resultados?</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq.q2.a">Los primeros datos de aprendizaje llegan en la primera semana. La optimización real de costo por lead suele estabilizarse entre la 3ª y 4ª semana.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">¿En qué plataformas pautan? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Principalmente Meta Ads (Facebook e Instagram). Según tu negocio, también incorporamos Google Ads para captar búsquedas con intención directa, y TikTok Ads cuando el público objetivo está ahí.</p></div>
+        <button class="faq-q"><span data-i18n="faq.q3.q">¿En qué plataformas pautan?</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq.q3.a">Principalmente Meta Ads (Facebook e Instagram). Según tu negocio, también incorporamos Google Ads para captar búsquedas con intención directa, y TikTok Ads cuando el público objetivo está ahí.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">¿Cómo se miden los resultados? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>Con reportes periódicos que muestran inversión, leads generados, costo por lead y, cuando es posible, retorno estimado sobre la inversión.</p></div>
+        <button class="faq-q"><span data-i18n="faq.q4.q">¿Cómo se miden los resultados?</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq.q4.a">Con reportes periódicos que muestran inversión, leads generados, costo por lead y, cuando es posible, retorno estimado sobre la inversión.</p></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q">¿Hay permanencia mínima? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="faq-a"><p>No hay contrato de permanencia mínima, puedes cancelar cuando quieras. Eso sí, para evaluar resultados reales recomendamos observar el progreso a partir del segundo mes, que es cuando la optimización empieza a mostrar su verdadero impacto.</p></div>
+        <button class="faq-q"><span data-i18n="faq.q5.q">¿Hay permanencia mínima?</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="faq-a"><p data-i18n="faq.q5.a">No hay contrato de permanencia mínima, puedes cancelar cuando quieras. Eso sí, para evaluar resultados reales recomendamos observar el progreso a partir del segundo mes, que es cuando la optimización empieza a mostrar su verdadero impacto.</p></div>
       </div>
     </div>
   </div>
@@ -665,10 +679,10 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <section class="section cta-final">
   <div class="container">
-    <span class="badge-urgente reveal">⚡ Cupos limitados de nuevos clientes este mes</span>
-    <h2 class="reveal">Tu próximo cliente puede estar buscando una solución como la tuya ahora mismo</h2>
-    <p class="lead reveal" style="margin-bottom:32px">Conversemos sobre una estrategia realista para convertir esa intención en oportunidades.</p>
-    <button class="btn btn-primary js-open-popup reveal">Quiero más clientes</button>
+    <span class="badge-urgente reveal" data-i18n="finalcta.badge">⚡ Cupos limitados de nuevos clientes este mes</span>
+    <h2 class="reveal" data-i18n="finalcta.title">Tu próximo cliente puede estar buscando una solución como la tuya ahora mismo</h2>
+    <p class="lead reveal" style="margin-bottom:32px" data-i18n="finalcta.lead">Conversemos sobre una estrategia realista para convertir esa intención en oportunidades.</p>
+    <button class="btn btn-primary js-open-popup reveal" data-i18n="header.cta">Quiero más clientes</button>
   </div>
 </section>
 
@@ -680,7 +694,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
     <div class="footer-top">
       <div class="footer-brand">
         <span class="logo js-brand">[NOMBRE DE LA MARCA]</span>
-        <p>Gestión estratégica de campañas para generar oportunidades comerciales.</p>
+        <p data-i18n="footer.tagline">Gestión estratégica de campañas para generar oportunidades comerciales.</p>
       </div>
       <div class="footer-contact">
         <p>ederpef1@gmail.com</p>
@@ -689,8 +703,8 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> <span class="js-brand">[NOMBRE DE LA MARCA]</span>. Todos los derechos reservados.</span>
-      <a href="#privacidad">Aviso de privacidad</a>
+      <span>© <span id="year"></span> <span class="js-brand">[NOMBRE DE LA MARCA]</span>. <span data-i18n="footer.rights">Todos los derechos reservados.</span></span>
+      <a href="#privacidad" data-i18n="footer.privacy">Aviso de privacidad</a>
     </div>
   </div>
 </footer>
@@ -698,7 +712,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
 <!-- ============================================================
      WHATSAPP FLOTANTE
      ============================================================ -->
-<a href="#" id="waFloat" class="wa-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+<a href="#" id="waFloat" class="wa-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-i18n-attr="aria-label:wa.aria_label">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.6-1.2-1.4-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.5-1.3-.7-1.8-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
 </a>
 
@@ -707,55 +721,55 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
      ============================================================ -->
 <div class="overlay" id="overlay">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="modal-close" id="modalClose" aria-label="Cerrar">
+    <button class="modal-close" id="modalClose" aria-label="Cerrar" data-i18n-attr="aria-label:popup.close">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
 
     <!-- form view -->
     <div id="formView">
       <div class="modal-header">
-        <span class="modal-eyebrow">✦ Primer paso</span>
-        <h2 id="modalTitle">Agenda tu diagnóstico gratuito</h2>
-        <p class="sub">Cuéntanos cómo contactarte. Revisaremos tu caso y te explicaremos qué oportunidades vemos.</p>
+        <span class="modal-eyebrow" data-i18n="popup.eyebrow">✦ Primer paso</span>
+        <h2 id="modalTitle" data-i18n="popup.title">Agenda tu diagnóstico gratuito</h2>
+        <p class="sub" data-i18n="popup.subtitle">Cuéntanos cómo contactarte. Revisaremos tu caso y te explicaremos qué oportunidades vemos.</p>
       </div>
 
       <form id="leadForm" novalidate>
         <div class="field" id="field-nombre">
-          <label for="nombre">Nombre y apellido o nombre de empresa <span class="req">*</span></label>
+          <label for="nombre"><span data-i18n="popup.nombre_label">Nombre y apellido o nombre de empresa</span> <span class="req">*</span></label>
           <input type="text" id="nombre" name="nombre" autocomplete="name">
-          <span class="err-msg">Escribe tu nombre o el de tu empresa.</span>
+          <span class="err-msg" data-i18n="popup.nombre_err">Escribe tu nombre o el de tu empresa.</span>
         </div>
 
         <div class="field" id="field-telefono">
-          <label for="telefono">Teléfono <span class="req">*</span></label>
+          <label for="telefono"><span data-i18n="popup.telefono_label">Teléfono</span> <span class="req">*</span></label>
           <div class="phone-row">
-            <select id="dialCode" aria-label="Código de país"></select>
+            <select id="dialCode" aria-label="Código de país" data-i18n-attr="aria-label:popup.dialcode_aria"></select>
             <input type="tel" id="telefono" name="telefono" placeholder="300 000 0000" autocomplete="tel">
           </div>
-          <span class="err-msg">Ingresa un número de teléfono válido.</span>
+          <span class="err-msg" data-i18n="popup.telefono_err">Ingresa un número de teléfono válido.</span>
         </div>
 
         <div class="field" id="field-email">
-          <label for="email">Correo electrónico <span class="req">*</span></label>
+          <label for="email"><span data-i18n="popup.email_label">Correo electrónico</span> <span class="req">*</span></label>
           <input type="email" id="email" name="email" autocomplete="email">
-          <span class="err-msg">Ingresa un correo electrónico válido.</span>
+          <span class="err-msg" data-i18n="popup.email_err">Ingresa un correo electrónico válido.</span>
         </div>
 
         <div class="field" id="field-pais">
-          <label for="pais">País <span class="req">*</span></label>
+          <label for="pais"><span data-i18n="popup.pais_label">País</span> <span class="req">*</span></label>
           <select id="pais" name="pais"></select>
         </div>
 
         <div class="checkbox-row" id="field-privacidad">
           <input type="checkbox" id="privacidad" name="privacidad">
-          <label for="privacidad">Acepto el <a href="#privacidad" target="_blank">aviso de privacidad</a> y autorizo el contacto sobre esta solicitud.</label>
+          <label for="privacidad" data-i18n-html="popup.privacy_label">Acepto el <a href="#privacidad" target="_blank">aviso de privacidad</a> y autorizo el contacto sobre esta solicitud.</label>
         </div>
 
         <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
-          <span class="btn-text">Quiero más clientes</span>
+          <span class="btn-text" data-i18n="header.cta">Quiero más clientes</span>
           <span class="spinner"></span>
         </button>
-        <p class="form-note">Tus datos se usarán únicamente para atender esta solicitud.</p>
+        <p class="form-note" data-i18n="popup.form_note">Tus datos se usarán únicamente para atender esta solicitud.</p>
       </form>
     </div>
 
@@ -764,9 +778,9 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
       <div class="check">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
-      <h2 id="thankyouTitle">¡Gracias!</h2>
-      <p>Recibimos tus datos. El siguiente paso es conversar brevemente sobre tu negocio y tus objetivos.</p>
-      <a href="#" id="waContinue" class="btn btn-primary" target="_blank" rel="noopener">Continuar por WhatsApp</a>
+      <h2 id="thankyouTitle" data-i18n="popup.thanks_default">¡Gracias!</h2>
+      <p data-i18n="popup.thanks_text">Recibimos tus datos. El siguiente paso es conversar brevemente sobre tu negocio y tus objetivos.</p>
+      <a href="#" id="waContinue" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="popup.wa_continue">Continuar por WhatsApp</a>
     </div>
   </div>
 </div>
@@ -786,32 +800,36 @@ const CONFIG = {
   }
 };
 
-/* Países con indicativo — Latinoamérica, España, EE.UU. y Canadá, orden alfabético */
+/* Países con indicativo y bandera — Latinoamérica, Caribe, España, EE.UU. y Canadá, orden alfabético */
 const COUNTRIES = [
-  { name: "Argentina", dial: "+54" },
-  { name: "Bolivia", dial: "+591" },
-  { name: "Canadá", dial: "+1" },
-  { name: "Chile", dial: "+56" },
-  { name: "Colombia", dial: "+57" },
-  { name: "Costa Rica", dial: "+506" },
-  { name: "Cuba", dial: "+53" },
-  { name: "Ecuador", dial: "+593" },
-  { name: "El Salvador", dial: "+503" },
-  { name: "España", dial: "+34" },
-  { name: "Estados Unidos", dial: "+1" },
-  { name: "Guatemala", dial: "+502" },
-  { name: "Honduras", dial: "+504" },
-  { name: "México", dial: "+52" },
-  { name: "Nicaragua", dial: "+505" },
-  { name: "Panamá", dial: "+507" },
-  { name: "Paraguay", dial: "+595" },
-  { name: "Perú", dial: "+51" },
-  { name: "Puerto Rico", dial: "+1" },
-  { name: "República Dominicana", dial: "+1" },
-  { name: "Uruguay", dial: "+598" },
-  { name: "Venezuela", dial: "+58" }
+  { name: "Argentina", en: "Argentina", dial: "+54", flag: "🇦🇷" },
+  { name: "Aruba", en: "Aruba", dial: "+297", flag: "🇦🇼" },
+  { name: "Bolivia", en: "Bolivia", dial: "+591", flag: "🇧🇴" },
+  { name: "Canadá", en: "Canada", dial: "+1", flag: "🇨🇦" },
+  { name: "Chile", en: "Chile", dial: "+56", flag: "🇨🇱" },
+  { name: "Colombia", en: "Colombia", dial: "+57", flag: "🇨🇴" },
+  { name: "Costa Rica", en: "Costa Rica", dial: "+506", flag: "🇨🇷" },
+  { name: "Cuba", en: "Cuba", dial: "+53", flag: "🇨🇺" },
+  { name: "Curazao", en: "Curaçao", dial: "+599", flag: "🇨🇼" },
+  { name: "Ecuador", en: "Ecuador", dial: "+593", flag: "🇪🇨" },
+  { name: "El Salvador", en: "El Salvador", dial: "+503", flag: "🇸🇻" },
+  { name: "España", en: "Spain", dial: "+34", flag: "🇪🇸" },
+  { name: "Estados Unidos", en: "United States", dial: "+1", flag: "🇺🇸" },
+  { name: "Guatemala", en: "Guatemala", dial: "+502", flag: "🇬🇹" },
+  { name: "Honduras", en: "Honduras", dial: "+504", flag: "🇭🇳" },
+  { name: "México", en: "Mexico", dial: "+52", flag: "🇲🇽" },
+  { name: "Nicaragua", en: "Nicaragua", dial: "+505", flag: "🇳🇮" },
+  { name: "Países Bajos", en: "Netherlands", dial: "+31", flag: "🇳🇱" },
+  { name: "Panamá", en: "Panama", dial: "+507", flag: "🇵🇦" },
+  { name: "Paraguay", en: "Paraguay", dial: "+595", flag: "🇵🇾" },
+  { name: "Perú", en: "Peru", dial: "+51", flag: "🇵🇪" },
+  { name: "Puerto Rico", en: "Puerto Rico", dial: "+1", flag: "🇵🇷" },
+  { name: "República Dominicana", en: "Dominican Republic", dial: "+1", flag: "🇩🇴" },
+  { name: "Uruguay", en: "Uruguay", dial: "+598", flag: "🇺🇾" },
+  { name: "Venezuela", en: "Venezuela", dial: "+58", flag: "🇻🇪" }
 ];
 const DEFAULT_COUNTRY = "Colombia";
+let currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'es';
 
 /* ============================================================
    Aplicar CONFIG al DOM
@@ -823,38 +841,337 @@ function applyConfig(){
     if (val !== undefined) el.textContent = val;
   });
   document.querySelectorAll('.js-brand').forEach(el=> el.textContent = CONFIG.BRAND_NAME);
-  document.title = document.title.replace('[NOMBRE DE LA MARCA]', CONFIG.BRAND_NAME);
-
-  const waUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola, quiero más información sobre sus servicios.')}`;
-  document.getElementById('waFloat').href = waUrl;
-
   document.getElementById('year').textContent = new Date().getFullYear();
 }
 
 /* ============================================================
-   Poblar selects de país / indicativo
+   Poblar selects de país / indicativo (con bandera, bilingüe)
    ============================================================ */
-function populateCountrySelects(){
+function populateCountrySelects(lang){
   const paisSel = document.getElementById('pais');
   const dialSel = document.getElementById('dialCode');
+  const prevValue = paisSel.value || DEFAULT_COUNTRY;
+
+  paisSel.innerHTML = '';
+  dialSel.innerHTML = '';
 
   COUNTRIES.forEach(c=>{
+    const label = lang === 'en' ? c.en : c.name;
+
     const opt1 = document.createElement('option');
     opt1.value = c.name;
-    opt1.textContent = `${c.name} (${c.dial})`;
-    if (c.name === DEFAULT_COUNTRY) opt1.selected = true;
+    opt1.textContent = `${c.flag} ${label} (${c.dial})`;
     paisSel.appendChild(opt1);
 
     const opt2 = document.createElement('option');
-    opt2.value = c.dial;
-    opt2.textContent = c.dial;
-    if (c.name === DEFAULT_COUNTRY) opt2.selected = true;
+    opt2.value = c.name;
+    opt2.textContent = `${c.flag} ${c.dial}`;
     dialSel.appendChild(opt2);
   });
 
-  paisSel.addEventListener('change', ()=>{
-    const country = COUNTRIES.find(c=>c.name === paisSel.value);
-    if (country) dialSel.value = country.dial;
+  paisSel.value = prevValue;
+  dialSel.value = prevValue;
+}
+
+/* Mantiene sincronizados país <-> código de país en ambas direcciones */
+function syncCountrySelects(){
+  const paisSel = document.getElementById('pais');
+  const dialSel = document.getElementById('dialCode');
+  paisSel.addEventListener('change', ()=>{ dialSel.value = paisSel.value; });
+  dialSel.addEventListener('change', ()=>{ paisSel.value = dialSel.value; });
+}
+
+/* ============================================================
+   Diccionario de idiomas (ES / EN)
+   ============================================================ */
+const I18N = {
+  es: {
+    'meta.title_suffix': 'Gestión de tráfico digital y generación de leads',
+    'meta.description': 'Gestionamos tus campañas en Meta Ads y Google Ads para que tu negocio reciba clientes potenciales calificados de forma constante.',
+    'header.cta': 'Quiero más clientes',
+    'hero.eyebrow': 'Captación predecible para negocios que quieren crecer',
+    'hero.h1': 'Llena tu agenda de <span class="accent">clientes potenciales</span> con campañas que sí convierten',
+    'hero.lead': 'Diseñamos, gestionamos y optimizamos tus campañas en Meta Ads, Google Ads y TikTok Ads para transformar tu inversión publicitaria en clientes calificados, cada semana.',
+    'hero.trust': 'Diagnóstico inicial sin costo',
+    'hero.stat_campaigns': 'Campañas gestionadas',
+    'hero.stat_leads': 'Leads generados',
+    'hero.stat_budget': 'Inversión administrada',
+    'problem.eyebrow': 'El problema',
+    'problem.title': 'Invertir tiempo sin un sistema de captación cuesta más de lo que parece',
+    'problem.lead': 'Si te identificas con alguno de estos escenarios, no necesitas publicar más. Necesitas una estrategia medible.',
+    'problem.card1.title': 'Publicas, pero no vendes',
+    'problem.card1.text': 'Hay actividad en redes, pero no conversaciones comerciales constantes.',
+    'problem.card2.title': 'Dependes del voz a voz',
+    'problem.card2.text': 'Tus referidos funcionan, pero no puedes predecir cuándo llegará el próximo cliente.',
+    'problem.card3.title': 'Ya gastaste sin resultados',
+    'problem.card3.text': 'Invertiste en anuncios sin claridad sobre qué funcionó ni por qué.',
+    'problem.card4.title': 'No conoces tus números',
+    'problem.card4.text': 'No sabes cuánto cuesta generar una oportunidad o cerrar una venta.',
+    'solution.eyebrow': 'Qué hacemos',
+    'solution.title': 'Un sistema de captación, no un anuncio suelto',
+    'solution.lead': 'Nos encargamos de todo el proceso para que tengas clientes potenciales de forma constante.',
+    'solution.card1.title': 'Estrategia a la medida',
+    'solution.card1.text': 'Un plan basado en tu oferta, tu margen y tu proceso comercial.',
+    'solution.card2.title': 'Dirección de anuncios',
+    'solution.card2.text': 'Definimos el mensaje y la estructura de cada anuncio. Tú aportas los creativos (fotos o videos) y los adaptamos a la estrategia.',
+    'solution.card3.title': 'Segmentación estratégica',
+    'solution.card3.text': 'Buscamos llegar a las audiencias con mayor probabilidad de interés real, y ajustamos según el desempeño de cada campaña.',
+    'solution.card4.title': 'Landing y embudo',
+    'solution.card4.text': 'Una ruta simple que convierte clics en oportunidades comerciales.',
+    'solution.card5.title': 'Optimización semanal',
+    'solution.card5.text': 'Revisamos datos cada 7 días y ajustamos para reducir desperdicio de presupuesto.',
+    'solution.card6.title': 'Reportes claros',
+    'solution.card6.text': 'Sabes cuánto inviertes, cuántos leads llegan y cuánto cuesta cada uno.',
+    'method.eyebrow': 'Nuestro método',
+    'method.title': 'De la estrategia al crecimiento, sin improvisar',
+    'method.step1.title': 'Diagnóstico',
+    'method.step1.text': 'Analizamos tu negocio, tu mercado y tu competencia para identificar oportunidades reales.',
+    'method.step2.title': 'Estrategia',
+    'method.step2.text': 'Diseñamos el plan de campañas, mensajes y segmentación enfocado en resultados medibles.',
+    'method.step3.title': 'Lanzamiento',
+    'method.step3.text': 'Creamos y activamos tus campañas, con seguimiento desde el primer día.',
+    'method.step4.title': 'Optimización y escala',
+    'method.step4.text': 'Ajustamos cada semana para bajar el costo por cliente y escalar lo que funciona.',
+    'results.eyebrow': 'Resultados',
+    'results.title': 'Capturas reales de cuentas gestionadas',
+    'results.lead': 'Directo del Administrador de Anuncios — sin editar, sin inventar cifras.',
+    'results.footnote_pre': '*Capturas reales de cuentas gestionadas por',
+    'results.footnote_post': 'Los resultados varían según negocio, mercado e inversión.',
+    'testi.eyebrow': 'Prueba social',
+    'testi.title': 'Negocios que dejaron de depender de la suerte',
+    'testi.card1.role': 'Cirujano Plástico',
+    'testi.card1.quote': '"He pasado bastante tiempo buscando un trafficker digital que primero me generara confianza y, segundo, que supiera administrar mis recursos. Con Eder todo ha funcionado: su experiencia y profesionalismo son excelentes."',
+    'testi.card2.role': 'Otorrino · Cirujana Plástica de Cara y Cuello',
+    'testi.card2.quote': '"Desde que Eder maneja mis pautas digitales, los prospectos potenciales han empezado a llegar. Como todo toma tiempo, he visto su constancia y esfuerzo para atraer mayor volumen de ventas a mi cuenta. Lo recomiendo."',
+    'testi.card3.role': 'Ingeniero Mecánico · Taller de reparación y diagnóstico',
+    'testi.card3.quote': '"Antes desconfiaba de cualquier cosa digital para atraer clientes, pero Eder me explicó en detalle la manera de hacerlo. Desde entonces ha crecido mi negocio en ventas. Lo recomiendo."',
+    'about.eyebrow': 'Sobre mí',
+    'about.title': 'Hola, soy Eder P, especialista en creación y gestión de campañas de tráfico digital',
+    'about.text': 'Ayudo a negocios y profesionales independientes a atraer más clientes potenciales, con campañas bien segmentadas y optimizadas semana a semana. Reviso cada cuenta de cerca, ajusto lo que no funciona y me enfoco en un solo objetivo: que tu inversión en anuncios se traduzca en clientes reales.',
+    'filtro.eyebrow': '¿Es para ti?',
+    'filtro.title': 'Trabajamos mejor con negocios que cumplen esto',
+    'filtro.si.title': 'Es para ti si...',
+    'filtro.si.li1': 'Tienes un negocio de servicios o productos ya establecidos.',
+    'filtro.si.li2': 'Quieres un sistema predecible de clientes, no un anuncio suelto.',
+    'filtro.si.li3': 'Estás dispuesto a invertir en publicidad de forma constante.',
+    'filtro.si.li4': 'Buscas datos claros para tomar decisiones.',
+    'filtro.no.title': 'No es para ti si...',
+    'filtro.no.li1': 'Buscas resultados de la noche a la mañana sin invertir.',
+    'filtro.no.li2': 'No tienes capacidad de atender más clientes por ahora.',
+    'filtro.no.li3': 'Buscas la opción más barata sin importar el resultado.',
+    'guarantee.title': 'Trabajo transparente, sin humo',
+    'guarantee.text': 'Tendrás acceso a reportes claros y visibilidad total sobre tu inversión. <b>Sin contratos que te amarren a largo plazo.</b> No hay permanencia mínima; eso sí, los resultados sólidos suelen verse a partir del segundo mes.',
+    'faq.eyebrow': 'Preguntas frecuentes',
+    'faq.title': 'Lo que necesitas saber antes de empezar',
+    'faq.q1.q': '¿Cuál es la inversión mínima en publicidad?',
+    'faq.q1.a': 'Depende del mercado, el ticket promedio y la zona geográfica. En el diagnóstico definimos un punto de partida responsable según tus objetivos.',
+    'faq.q2.q': '¿Cuánto tiempo tarda en ver resultados?',
+    'faq.q2.a': 'Los primeros datos de aprendizaje llegan en la primera semana. La optimización real de costo por lead suele estabilizarse entre la 3ª y 4ª semana.',
+    'faq.q3.q': '¿En qué plataformas pautan?',
+    'faq.q3.a': 'Principalmente Meta Ads (Facebook e Instagram). Según tu negocio, también incorporamos Google Ads para captar búsquedas con intención directa, y TikTok Ads cuando el público objetivo está ahí.',
+    'faq.q4.q': '¿Cómo se miden los resultados?',
+    'faq.q4.a': 'Con reportes periódicos que muestran inversión, leads generados, costo por lead y, cuando es posible, retorno estimado sobre la inversión.',
+    'faq.q5.q': '¿Hay permanencia mínima?',
+    'faq.q5.a': 'No hay contrato de permanencia mínima, puedes cancelar cuando quieras. Eso sí, para evaluar resultados reales recomendamos observar el progreso a partir del segundo mes, que es cuando la optimización empieza a mostrar su verdadero impacto.',
+    'finalcta.badge': '⚡ Cupos limitados de nuevos clientes este mes',
+    'finalcta.title': 'Tu próximo cliente puede estar buscando una solución como la tuya ahora mismo',
+    'finalcta.lead': 'Conversemos sobre una estrategia realista para convertir esa intención en oportunidades.',
+    'footer.tagline': 'Gestión estratégica de campañas para generar oportunidades comerciales.',
+    'footer.rights': 'Todos los derechos reservados.',
+    'footer.privacy': 'Aviso de privacidad',
+    'wa.aria_label': 'Escríbenos por WhatsApp',
+    'wa.default_message': 'Hola, quiero más información sobre sus servicios.',
+    'wa.after_submit': (nombre)=> `Hola, soy ${nombre}. Acabo de registrarme para el diagnóstico gratuito.`,
+    'popup.close': 'Cerrar',
+    'popup.eyebrow': '✦ Primer paso',
+    'popup.title': 'Agenda tu diagnóstico gratuito',
+    'popup.subtitle': 'Cuéntanos cómo contactarte. Revisaremos tu caso y te explicaremos qué oportunidades vemos.',
+    'popup.nombre_label': 'Nombre y apellido o nombre de empresa',
+    'popup.nombre_err': 'Escribe tu nombre o el de tu empresa.',
+    'popup.telefono_label': 'Teléfono',
+    'popup.telefono_err': 'Ingresa un número de teléfono válido.',
+    'popup.dialcode_aria': 'Código de país',
+    'popup.email_label': 'Correo electrónico',
+    'popup.email_err': 'Ingresa un correo electrónico válido.',
+    'popup.pais_label': 'País',
+    'popup.privacy_label': 'Acepto el <a href="#privacidad" target="_blank">aviso de privacidad</a> y autorizo el contacto sobre esta solicitud.',
+    'popup.form_note': 'Tus datos se usarán únicamente para atender esta solicitud.',
+    'popup.thanks_default': '¡Gracias!',
+    'popup.thanks_prefix': '¡Gracias',
+    'popup.thanks_text': 'Recibimos tus datos. El siguiente paso es conversar brevemente sobre tu negocio y tus objetivos.',
+    'popup.wa_continue': 'Continuar por WhatsApp',
+    'popup.send_error': 'No pudimos enviar tus datos. Intenta de nuevo o escríbenos directamente por WhatsApp.'
+  },
+  en: {
+    'meta.title_suffix': 'Digital Traffic Management & Lead Generation',
+    'meta.description': "We manage your Meta Ads and Google Ads campaigns so your business gets qualified leads consistently.",
+    'header.cta': 'Get More Clients',
+    'hero.eyebrow': 'Predictable client acquisition for growing businesses',
+    'hero.h1': 'Fill your calendar with <span class="accent">qualified leads</span> through campaigns that actually convert',
+    'hero.lead': "We design, manage, and optimize your Meta Ads, Google Ads, and TikTok Ads campaigns to turn your ad spend into qualified clients, every week.",
+    'hero.trust': 'Free initial diagnosis',
+    'hero.stat_campaigns': 'Campaigns managed',
+    'hero.stat_leads': 'Leads generated',
+    'hero.stat_budget': 'Ad spend managed',
+    'problem.eyebrow': 'The problem',
+    'problem.title': "Spending time without a client-acquisition system costs more than it seems",
+    'problem.lead': "If any of these scenarios sound familiar, you don't need to post more. You need a measurable strategy.",
+    'problem.card1.title': "You post, but you don't sell",
+    'problem.card1.text': "There's activity on social media, but no steady stream of sales conversations.",
+    'problem.card2.title': 'You depend on word of mouth',
+    'problem.card2.text': "Your referrals work, but you can't predict when the next client will arrive.",
+    'problem.card3.title': "You've already spent without results",
+    'problem.card3.text': 'You invested in ads without clarity on what worked or why.',
+    'problem.card4.title': "You don't know your numbers",
+    'problem.card4.text': "You don't know how much it costs to generate a lead or close a sale.",
+    'solution.eyebrow': 'What we do',
+    'solution.title': 'A client-acquisition system, not a random ad',
+    'solution.lead': 'We handle the entire process so you get qualified leads consistently.',
+    'solution.card1.title': 'Custom strategy',
+    'solution.card1.text': 'A plan built around your offer, your margins, and your sales process.',
+    'solution.card2.title': 'Ad direction',
+    'solution.card2.text': 'We define the message and structure of every ad. You provide the creatives (photos or videos) and we adapt them to the strategy.',
+    'solution.card3.title': 'Strategic targeting',
+    'solution.card3.text': "We reach the audiences most likely to have real interest, and adjust based on each campaign's performance.",
+    'solution.card4.title': 'Landing page & funnel',
+    'solution.card4.text': 'A simple path that turns clicks into sales opportunities.',
+    'solution.card5.title': 'Weekly optimization',
+    'solution.card5.text': 'We review the data every 7 days and adjust to reduce wasted budget.',
+    'solution.card6.title': 'Clear reporting',
+    'solution.card6.text': 'You know how much you invest, how many leads come in, and how much each one costs.',
+    'method.eyebrow': 'Our method',
+    'method.title': 'From strategy to growth, with no guesswork',
+    'method.step1.title': 'Diagnosis',
+    'method.step1.text': 'We analyze your business, your market, and your competitors to identify real opportunities.',
+    'method.step2.title': 'Strategy',
+    'method.step2.text': 'We design the campaign plan, messaging, and targeting focused on measurable results.',
+    'method.step3.title': 'Launch',
+    'method.step3.text': 'We create and launch your campaigns, tracking performance from day one.',
+    'method.step4.title': 'Optimization & scale',
+    'method.step4.text': 'We adjust weekly to lower cost per client and scale what works.',
+    'results.eyebrow': 'Results',
+    'results.title': 'Real screenshots from managed accounts',
+    'results.lead': 'Straight from the Ads Manager — unedited, no invented numbers.',
+    'results.footnote_pre': '*Real screenshots from accounts managed by',
+    'results.footnote_post': 'Results vary by business, market, and investment.',
+    'testi.eyebrow': 'Social proof',
+    'testi.title': 'Businesses that stopped relying on luck',
+    'testi.card1.role': 'Plastic Surgeon',
+    'testi.card1.quote': '"I spent a lot of time looking for a digital traffic manager who would first build trust with me and, second, know how to manage my resources well. With Eder everything has worked out: his experience and professionalism are excellent."',
+    'testi.card2.role': 'ENT · Facial Plastic Surgeon',
+    'testi.card2.quote': "\"Since Eder started managing my digital ads, potential leads have started coming in. Since everything takes time, I've seen his consistency and effort to bring more sales volume to my account. I recommend him.\"",
+    'testi.card3.role': 'Mechanical Engineer · Repair & Diagnostics Shop',
+    'testi.card3.quote': '"Before, I distrusted anything digital for attracting clients, but Eder explained the approach to me in detail. Since then my business has grown in sales. I recommend him."',
+    'about.eyebrow': 'About me',
+    'about.title': "Hi, I'm Eder P, a digital ad campaign creation and management specialist",
+    'about.text': "I help businesses and independent professionals attract more qualified leads, with well-targeted campaigns optimized week after week. I review every account closely, adjust what isn't working, and focus on one goal: turning your ad spend into real clients.",
+    'filtro.eyebrow': 'Is this for you?',
+    'filtro.title': 'We work best with businesses that meet these criteria',
+    'filtro.si.title': 'This is for you if...',
+    'filtro.si.li1': 'You have an established service or product business.',
+    'filtro.si.li2': "You want a predictable client system, not a one-off ad.",
+    'filtro.si.li3': "You're willing to invest in advertising consistently.",
+    'filtro.si.li4': 'You want clear data to make decisions.',
+    'filtro.no.title': 'This is NOT for you if...',
+    'filtro.no.li1': 'You expect overnight results without investing.',
+    'filtro.no.li2': "You can't handle more clients right now.",
+    'filtro.no.li3': "You're just looking for the cheapest option regardless of results.",
+    'guarantee.title': 'Transparent work, no smoke and mirrors',
+    'guarantee.text': "You'll get clear reports and full visibility into your investment. <b>No long-term contracts tying you down.</b> There's no minimum commitment — though solid results usually show up starting the second month.",
+    'faq.eyebrow': 'Frequently asked questions',
+    'faq.title': 'What you need to know before getting started',
+    'faq.q1.q': "What's the minimum ad spend?",
+    'faq.q1.a': 'It depends on your market, average ticket size, and location. During the diagnosis we set a responsible starting point based on your goals.',
+    'faq.q2.q': 'How long until I see results?',
+    'faq.q2.a': 'The first learning data comes in during week one. Real cost-per-lead optimization usually stabilizes between weeks 3 and 4.',
+    'faq.q3.q': 'Which platforms do you advertise on?',
+    'faq.q3.a': 'Mainly Meta Ads (Facebook and Instagram). Depending on your business, we also add Google Ads to capture direct-intent searches, and TikTok Ads when your target audience is there.',
+    'faq.q4.q': 'How are results measured?',
+    'faq.q4.a': 'With regular reports showing spend, leads generated, cost per lead, and, when possible, estimated return on investment.',
+    'faq.q5.q': 'Is there a minimum commitment?',
+    'faq.q5.a': "There's no minimum-term contract — you can cancel anytime. That said, to evaluate real results we recommend watching progress from the second month on, since that's when optimization starts showing its true impact.",
+    'finalcta.badge': '⚡ Limited new-client spots this month',
+    'finalcta.title': 'Your next client might be searching for a solution like yours right now',
+    'finalcta.lead': "Let's talk about a realistic strategy to turn that intent into opportunities.",
+    'footer.tagline': 'Strategic campaign management to generate business opportunities.',
+    'footer.rights': 'All rights reserved.',
+    'footer.privacy': 'Privacy notice',
+    'wa.aria_label': 'Message us on WhatsApp',
+    'wa.default_message': "Hi, I'd like more information about your services.",
+    'wa.after_submit': (nombre)=> `Hi, I'm ${nombre}. I just signed up for the free diagnosis.`,
+    'popup.close': 'Close',
+    'popup.eyebrow': '✦ First step',
+    'popup.title': 'Book your free diagnosis',
+    'popup.subtitle': "Tell us how to reach you. We'll review your case and explain what opportunities we see.",
+    'popup.nombre_label': 'Full name or company name',
+    'popup.nombre_err': "Enter your name or your company's name.",
+    'popup.telefono_label': 'Phone',
+    'popup.telefono_err': 'Enter a valid phone number.',
+    'popup.dialcode_aria': 'Country code',
+    'popup.email_label': 'Email',
+    'popup.email_err': 'Enter a valid email address.',
+    'popup.pais_label': 'Country',
+    'popup.privacy_label': 'I accept the <a href="#privacidad" target="_blank">privacy notice</a> and authorize contact regarding this request.',
+    'popup.form_note': 'Your information will only be used to handle this request.',
+    'popup.thanks_default': 'Thank you!',
+    'popup.thanks_prefix': 'Thank you',
+    'popup.thanks_text': "We received your information. The next step is a quick conversation about your business and your goals.",
+    'popup.wa_continue': 'Continue on WhatsApp',
+    'popup.send_error': "We couldn't send your information. Try again or message us directly on WhatsApp."
+  }
+};
+
+/* Aplica el idioma activo a todo el DOM marcado con data-i18n / data-i18n-html / data-i18n-attr */
+function applyI18n(lang){
+  const dict = I18N[lang];
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const val = dict[el.getAttribute('data-i18n')];
+    if (val !== undefined) el.textContent = val;
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const val = dict[el.getAttribute('data-i18n-html')];
+    if (val !== undefined) el.innerHTML = val;
+  });
+
+  document.querySelectorAll('[data-i18n-attr]').forEach(el=>{
+    el.getAttribute('data-i18n-attr').split('|').forEach(pair=>{
+      const [attr, key] = pair.split(':');
+      const val = dict[key];
+      if (val !== undefined) el.setAttribute(attr, val);
+    });
+  });
+
+  document.querySelectorAll('.lang-btn').forEach(b=> b.classList.toggle('active', b.dataset.lang === lang));
+
+  document.title = `${CONFIG.BRAND_NAME} | ${dict['meta.title_suffix']}`;
+  document.querySelector('meta[name="description"]').setAttribute('content', dict['meta.description']);
+
+  updateWaFloat(lang);
+}
+
+/* Actualiza el enlace flotante de WhatsApp con el mensaje del idioma activo */
+function updateWaFloat(lang){
+  const msg = I18N[lang]['wa.default_message'];
+  document.getElementById('waFloat').href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
+/* Selector de idioma (header): recuerda la elección y repuebla país/código */
+function initLanguage(){
+  populateCountrySelects(currentLang);
+  applyI18n(currentLang);
+
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const lang = btn.dataset.lang;
+      if (lang === currentLang) return;
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      populateCountrySelects(lang);
+      applyI18n(lang);
+    });
   });
 }
 
@@ -1051,7 +1368,8 @@ function initFormSubmit(){
     submitBtn.disabled = true;
 
     const nombre = document.getElementById('nombre').value.trim();
-    const dialCode = document.getElementById('dialCode').value;
+    const dialCountry = COUNTRIES.find(c=>c.name === document.getElementById('dialCode').value);
+    const dialCode = dialCountry ? dialCountry.dial : '';
     const telefonoRaw = document.getElementById('telefono').value.replace(/\D/g,'');
     const email = document.getElementById('email').value.trim();
     const pais = document.getElementById('pais').value;
@@ -1072,14 +1390,14 @@ function initFormSubmit(){
       if (typeof fbq === 'function') fbq('track', 'Lead');
       if (typeof gtag === 'function') gtag('event', 'generate_lead');
 
-      document.getElementById('thankyouTitle').textContent = `¡Gracias, ${nombre.split(' ')[0]}!`;
-      const waMsg = `Hola, soy ${nombre}. Acabo de registrarme para el diagnóstico gratuito.`;
+      document.getElementById('thankyouTitle').textContent = `${I18N[currentLang]['popup.thanks_prefix']}, ${nombre.split(' ')[0]}!`;
+      const waMsg = I18N[currentLang]['wa.after_submit'](nombre);
       document.getElementById('waContinue').href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
 
       document.getElementById('formView').style.display = 'none';
       document.getElementById('thankyouView').classList.add('active');
     }catch(err){
-      alert('No pudimos enviar tus datos. Intenta de nuevo o escríbenos directamente por WhatsApp.');
+      alert(I18N[currentLang]['popup.send_error']);
       console.error(err);
     }finally{
       isSubmitting = false;
@@ -1098,11 +1416,8 @@ function resetPopupOnClose(){
         document.getElementById('formView').style.display = '';
         document.getElementById('thankyouView').classList.remove('active');
         document.querySelectorAll('.field.error, .checkbox-row.error').forEach(f=> f.classList.remove('error'));
-        const country = COUNTRIES.find(c=>c.name === DEFAULT_COUNTRY);
-        if (country){
-          document.getElementById('pais').value = DEFAULT_COUNTRY;
-          document.getElementById('dialCode').value = country.dial;
-        }
+        document.getElementById('pais').value = DEFAULT_COUNTRY;
+        document.getElementById('dialCode').value = DEFAULT_COUNTRY;
       }, 300);
     }
   });
@@ -1111,7 +1426,8 @@ function resetPopupOnClose(){
 
 document.addEventListener('DOMContentLoaded', ()=>{
   applyConfig();
-  populateCountrySelects();
+  initLanguage();
+  syncCountrySelects();
   initHeaderScroll();
   initReveal();
   initFaq();
