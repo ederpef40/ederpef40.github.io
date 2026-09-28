@@ -1020,13 +1020,20 @@ function getUtmParams(){
 
 /* Envía el lead al webhook configurado (Make, Zapier o Google Apps Script) */
 async function sendLead(data){
-  const response = await fetch(CONFIG.WEBHOOK_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-  if (!response.ok) throw new Error('Webhook respondió con error: ' + response.status);
-  return response;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  try {
+    const response = await fetch(CONFIG.WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // evita el preflight CORS que Google Apps Script no soporta
+      body: JSON.stringify(data),
+      signal: controller.signal
+    });
+    if (!response.ok) throw new Error('Webhook respondió con error: ' + response.status);
+    return response;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 function initFormSubmit(){
