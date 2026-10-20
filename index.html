@@ -340,6 +340,32 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
 }
 .thankyou h2{margin-bottom:10px}
 .thankyou p{color:var(--text-muted);margin-bottom:24px;font-size:15px}
+.thankyou .cal-btn{margin-bottom:12px}
+
+/* ---------- formulario de 2 pasos ---------- */
+.form-step{display:none}
+.form-step.active{display:block}
+.step-progress{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.step-progress .bar{flex:1;height:4px;border-radius:999px;background:var(--border);overflow:hidden}
+.step-progress .bar-fill{height:100%;width:50%;background:var(--accent);border-radius:999px;transition:width .3s ease}
+.step-progress .label{font-size:12.5px;color:var(--text-muted);white-space:nowrap;flex-shrink:0}
+.back-link{
+  display:inline-flex;align-items:center;gap:4px;color:var(--text-muted);font-size:13.5px;
+  margin-bottom:14px;background:none;padding:0;
+}
+.back-link:hover{color:var(--text)}
+
+.choice-group{display:flex;flex-direction:column;gap:10px}
+.choice-input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+.choice-btn{
+  display:block;width:100%;padding:14px 16px;border-radius:var(--radius-sm);
+  border:1px solid var(--border);background:var(--bg-soft);color:var(--text);
+  font-size:15px;font-weight:600;cursor:pointer;text-align:left;
+  transition:border-color .15s ease, background .15s ease;
+}
+.choice-input:checked + .choice-btn{border-color:var(--accent);background:rgba(255,106,61,.1);color:var(--accent-light)}
+.choice-input:focus-visible + .choice-btn{outline:2px solid var(--accent);outline-offset:2px}
+.field.error .choice-btn{border-color:var(--error)}
 
 /* ---------- responsive ---------- */
 @media(max-width:960px){
@@ -729,42 +755,120 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
       </div>
 
       <form id="leadForm" novalidate>
-        <div class="field" id="field-nombre">
-          <label for="nombre"><span data-i18n="popup.nombre_label">Nombre y apellido o nombre de empresa</span> <span class="req">*</span></label>
-          <input type="text" id="nombre" name="nombre" autocomplete="name">
-          <span class="err-msg" data-i18n="popup.nombre_err">Escribe tu nombre o el de tu empresa.</span>
+        <div class="step-progress">
+          <div class="bar"><div class="bar-fill" id="stepBarFill"></div></div>
+          <span class="label" id="stepLabel" data-i18n="popup.step_label_1">Paso 1 de 2</span>
         </div>
 
-        <div class="field" id="field-telefono">
-          <label for="telefono"><span data-i18n="popup.telefono_label">Teléfono</span> <span class="req">*</span></label>
-          <div class="phone-row">
-            <select id="dialCode" aria-label="Código de país" data-i18n-attr="aria-label:popup.dialcode_aria"></select>
-            <input type="tel" id="telefono" name="telefono" placeholder="300 000 0000" autocomplete="tel">
+        <!-- PASO 1 -->
+        <div class="form-step active" id="formStep1">
+          <div class="field" id="field-nombre">
+            <label for="nombre"><span data-i18n="popup.nombre_label">Nombre y apellido o nombre de empresa</span> <span class="req">*</span></label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name">
+            <span class="err-msg" data-i18n="popup.nombre_err">Escribe tu nombre o el de tu empresa.</span>
           </div>
-          <span class="err-msg" data-i18n="popup.telefono_err">Ingresa un número de teléfono válido.</span>
+
+          <div class="field" id="field-telefono">
+            <label for="telefono"><span data-i18n="popup.telefono_label">Teléfono</span> <span class="req">*</span></label>
+            <div class="phone-row">
+              <select id="dialCode" aria-label="Código de país" data-i18n-attr="aria-label:popup.dialcode_aria"></select>
+              <input type="tel" id="telefono" name="telefono" placeholder="300 000 0000" autocomplete="tel">
+            </div>
+            <span class="err-msg" data-i18n="popup.telefono_err">Ingresa un número de teléfono válido.</span>
+          </div>
+
+          <div class="field" id="field-email">
+            <label for="email"><span data-i18n="popup.email_label">Correo electrónico</span> <span class="req">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email">
+            <span class="err-msg" data-i18n="popup.email_err">Ingresa un correo electrónico válido.</span>
+          </div>
+
+          <div class="field" id="field-pais">
+            <label for="pais"><span data-i18n="popup.pais_label">País</span> <span class="req">*</span></label>
+            <select id="pais" name="pais"></select>
+          </div>
+
+          <div class="checkbox-row" id="field-privacidad">
+            <input type="checkbox" id="privacidad" name="privacidad">
+            <label for="privacidad" data-i18n-html="popup.privacy_label">Acepto el <a href="#privacidad" target="_blank">aviso de privacidad</a> y autorizo el contacto sobre esta solicitud.</label>
+          </div>
+
+          <button type="button" class="btn btn-primary submit-btn" id="step1NextBtn">
+            <span class="btn-text" data-i18n="popup.continue_btn">Continuar</span>
+          </button>
+          <p class="form-note" data-i18n="popup.form_note">Tus datos se usarán únicamente para atender esta solicitud.</p>
         </div>
 
-        <div class="field" id="field-email">
-          <label for="email"><span data-i18n="popup.email_label">Correo electrónico</span> <span class="req">*</span></label>
-          <input type="email" id="email" name="email" autocomplete="email">
-          <span class="err-msg" data-i18n="popup.email_err">Ingresa un correo electrónico válido.</span>
-        </div>
+        <!-- PASO 2 -->
+        <div class="form-step" id="formStep2">
+          <button type="button" class="back-link" id="step2BackBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            <span data-i18n="popup.back">Atrás</span>
+          </button>
 
-        <div class="field" id="field-pais">
-          <label for="pais"><span data-i18n="popup.pais_label">País</span> <span class="req">*</span></label>
-          <select id="pais" name="pais"></select>
-        </div>
+          <div class="field" id="field-tipo_negocio">
+            <label data-i18n="popup.q1_label">¿Qué tipo de negocio tienes? <span class="req">*</span></label>
+            <div class="choice-group">
+              <input type="radio" class="choice-input" id="tn-1" name="tipo_negocio" value="Clínica/consultorio"><label for="tn-1" class="choice-btn" data-i18n="popup.q1_opt1">Clínica/consultorio</label>
+              <input type="radio" class="choice-input" id="tn-2" name="tipo_negocio" value="Taller/servicio técnico"><label for="tn-2" class="choice-btn" data-i18n="popup.q1_opt2">Taller/servicio técnico</label>
+              <input type="radio" class="choice-input" id="tn-3" name="tipo_negocio" value="Restaurante/comida"><label for="tn-3" class="choice-btn" data-i18n="popup.q1_opt3">Restaurante/comida</label>
+              <input type="radio" class="choice-input" id="tn-4" name="tipo_negocio" value="Tienda/comercio"><label for="tn-4" class="choice-btn" data-i18n="popup.q1_opt4">Tienda/comercio</label>
+              <input type="radio" class="choice-input" id="tn-5" name="tipo_negocio" value="Profesional independiente"><label for="tn-5" class="choice-btn" data-i18n="popup.q1_opt5">Profesional independiente</label>
+              <input type="radio" class="choice-input" id="tn-6" name="tipo_negocio" value="Otro"><label for="tn-6" class="choice-btn" data-i18n="popup.q1_opt6">Otro</label>
+            </div>
+            <span class="err-msg" data-i18n="popup.q1_err">Selecciona una opción.</span>
+          </div>
 
-        <div class="checkbox-row" id="field-privacidad">
-          <input type="checkbox" id="privacidad" name="privacidad">
-          <label for="privacidad" data-i18n-html="popup.privacy_label">Acepto el <a href="#privacidad" target="_blank">aviso de privacidad</a> y autorizo el contacto sobre esta solicitud.</label>
-        </div>
+          <div class="field" id="field-antiguedad">
+            <label data-i18n="popup.q2_label">¿Cuánto tiempo lleva funcionando tu negocio? <span class="req">*</span></label>
+            <div class="choice-group">
+              <input type="radio" class="choice-input" id="ant-1" name="antiguedad" value="Más de 1 año"><label for="ant-1" class="choice-btn" data-i18n="popup.q2_opt1">Más de 1 año</label>
+              <input type="radio" class="choice-input" id="ant-2" name="antiguedad" value="Menos de 1 año"><label for="ant-2" class="choice-btn" data-i18n="popup.q2_opt2">Menos de 1 año</label>
+              <input type="radio" class="choice-input" id="ant-3" name="antiguedad" value="Todavía no abro"><label for="ant-3" class="choice-btn" data-i18n="popup.q2_opt3">Todavía no abro</label>
+            </div>
+            <span class="err-msg" data-i18n="popup.q2_err">Selecciona una opción.</span>
+          </div>
 
-        <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
-          <span class="btn-text" data-i18n="header.cta">Quiero más clientes</span>
-          <span class="spinner"></span>
-        </button>
-        <p class="form-note" data-i18n="popup.form_note">Tus datos se usarán únicamente para atender esta solicitud.</p>
+          <div class="field" id="field-redes">
+            <label data-i18n="popup.q3_label">¿Tienes Instagram o página web del negocio? <span class="req">*</span></label>
+            <div class="choice-group">
+              <input type="radio" class="choice-input" id="redes-si" name="tiene_redes" value="si"><label for="redes-si" class="choice-btn" data-i18n="popup.q3_opt_si">Sí</label>
+              <input type="radio" class="choice-input" id="redes-no" name="tiene_redes" value="no"><label for="redes-no" class="choice-btn" data-i18n="popup.q3_opt_no">No tengo</label>
+            </div>
+            <span class="err-msg" data-i18n="popup.q3_err">Selecciona una opción.</span>
+          </div>
+
+          <div class="field" id="field-enlace_negocio" style="display:none">
+            <label for="enlace_negocio" data-i18n="popup.q3_link_label">Enlace de Instagram o sitio web (opcional)</label>
+            <input type="text" id="enlace_negocio" name="enlace_negocio" placeholder="instagram.com/tunegocio">
+          </div>
+
+          <div class="field" id="field-presupuesto">
+            <label data-i18n="popup.q4_label">Nuestro servicio de gestión está entre USD 200 y 600 al mes, más tu inversión en anuncios. ¿Está dentro de tu presupuesto? <span class="req">*</span></label>
+            <div class="choice-group">
+              <input type="radio" class="choice-input" id="pres-1" name="presupuesto" value="Sí"><label for="pres-1" class="choice-btn" data-i18n="popup.q4_opt1">Sí</label>
+              <input type="radio" class="choice-input" id="pres-2" name="presupuesto" value="Necesito más información"><label for="pres-2" class="choice-btn" data-i18n="popup.q4_opt2">Necesito más información</label>
+              <input type="radio" class="choice-input" id="pres-3" name="presupuesto" value="No por ahora"><label for="pres-3" class="choice-btn" data-i18n="popup.q4_opt3">No por ahora</label>
+            </div>
+            <span class="err-msg" data-i18n="popup.q4_err">Selecciona una opción.</span>
+          </div>
+
+          <div class="field" id="field-cuando">
+            <label data-i18n="popup.q5_label">¿Cuándo te gustaría empezar? <span class="req">*</span></label>
+            <div class="choice-group">
+              <input type="radio" class="choice-input" id="cu-1" name="cuando_empezar" value="Esta semana"><label for="cu-1" class="choice-btn" data-i18n="popup.q5_opt1">Esta semana</label>
+              <input type="radio" class="choice-input" id="cu-2" name="cuando_empezar" value="Este mes"><label for="cu-2" class="choice-btn" data-i18n="popup.q5_opt2">Este mes</label>
+              <input type="radio" class="choice-input" id="cu-3" name="cuando_empezar" value="Solo estoy averiguando"><label for="cu-3" class="choice-btn" data-i18n="popup.q5_opt3">Solo estoy averiguando</label>
+            </div>
+            <span class="err-msg" data-i18n="popup.q5_err">Selecciona una opción.</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-btn" id="submitBtn">
+            <span class="btn-text" data-i18n="popup.final_cta">Agendar mi diagnóstico</span>
+            <span class="spinner"></span>
+          </button>
+          <p class="form-note" data-i18n="popup.form_note">Tus datos se usarán únicamente para atender esta solicitud.</p>
+        </div>
       </form>
     </div>
 
@@ -774,7 +878,8 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
       </div>
       <h2 id="thankyouTitle" data-i18n="popup.thanks_default">¡Gracias!</h2>
-      <p data-i18n="popup.thanks_text">Recibimos tus datos. El siguiente paso es conversar brevemente sobre tu negocio y tus objetivos.</p>
+      <p id="thankyouText" data-i18n="popup.thanks_text">Recibimos tus datos. El siguiente paso es conversar brevemente sobre tu negocio y tus objetivos.</p>
+      <a href="#" id="calBtn" class="btn btn-primary cal-btn" target="_blank" rel="noopener" style="display:none"><span data-i18n="popup.cal_btn">Elegir fecha y hora</span></a>
       <a href="https://wa.me/573016026374?text=Hola%20Eder%2C%20acabo%20de%20registrarme%20para%20el%20diagn%C3%B3stico%20gratuito" id="waContinue" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="popup.wa_continue">Continuar por WhatsApp</a>
     </div>
   </div>
@@ -788,6 +893,7 @@ const CONFIG = {
   BRAND_NAME: "Impulsa Ventas - Eder Ads",
   WHATSAPP_NUMBER: "573016026374", // solo dígitos, con código de país, sin '+' ni espacios
   WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbx9ZPE7AIROUFB2wTbzQaHoObyqUp-tSwHknpLrWoQhQZizKIQCAK8QdIGMSa3SzzT5Vw/exec", // Google Apps Script conectado a "Leads - Impulsa Ventas"
+  CALENDAR_URL: "PEGAR_AQUI_TU_ENLACE_DE_CALENDARIO", // ej: tu enlace de Calendly/Google Calendar para agendar el diagnóstico
   metrics: {
     campaigns: "150+",
     leads: "32,000+",
@@ -976,7 +1082,7 @@ const I18N = {
     'footer.privacy': 'Aviso de privacidad',
     'wa.aria_label': 'Escríbenos por WhatsApp',
     'wa.default_message': 'Hola, quiero más información sobre sus servicios.',
-    'wa.after_submit': (nombre)=> `Hola, soy ${nombre}. Acabo de registrarme para el diagnóstico gratuito.`,
+    'wa.after_submit': (nombre, tipoNegocio)=> `Hola, soy ${nombre}. Mi negocio es de tipo "${tipoNegocio}" y acabo de registrarme para agendar mi diagnóstico gratuito.`,
     'popup.close': 'Cerrar',
     'popup.eyebrow': '✦ Primer paso',
     'popup.title': 'Agenda tu diagnóstico gratuito',
@@ -995,7 +1101,43 @@ const I18N = {
     'popup.thanks_prefix': '¡Gracias',
     'popup.thanks_text': 'Recibimos tus datos. El siguiente paso es conversar brevemente sobre tu negocio y tus objetivos.',
     'popup.wa_continue': 'Continuar por WhatsApp',
-    'popup.send_error': 'No pudimos enviar tus datos. Intenta de nuevo o escríbenos directamente por WhatsApp.'
+    'popup.send_error': 'No pudimos enviar tus datos. Intenta de nuevo o escríbenos directamente por WhatsApp.',
+    'popup.step_label_1': 'Paso 1 de 2',
+    'popup.step_label_2': 'Paso 2 de 2',
+    'popup.continue_btn': 'Continuar',
+    'popup.back': 'Atrás',
+    'popup.q1_label': '¿Qué tipo de negocio tienes?',
+    'popup.q1_opt1': 'Clínica/consultorio',
+    'popup.q1_opt2': 'Taller/servicio técnico',
+    'popup.q1_opt3': 'Restaurante/comida',
+    'popup.q1_opt4': 'Tienda/comercio',
+    'popup.q1_opt5': 'Profesional independiente',
+    'popup.q1_opt6': 'Otro',
+    'popup.q1_err': 'Selecciona una opción.',
+    'popup.q2_label': '¿Cuánto tiempo lleva funcionando tu negocio?',
+    'popup.q2_opt1': 'Más de 1 año',
+    'popup.q2_opt2': 'Menos de 1 año',
+    'popup.q2_opt3': 'Todavía no abro',
+    'popup.q2_err': 'Selecciona una opción.',
+    'popup.q3_label': '¿Tienes Instagram o página web del negocio?',
+    'popup.q3_opt_si': 'Sí',
+    'popup.q3_opt_no': 'No tengo',
+    'popup.q3_link_label': 'Enlace de Instagram o sitio web (opcional)',
+    'popup.q3_err': 'Selecciona una opción.',
+    'popup.q4_label': 'Nuestro servicio de gestión está entre USD 200 y 600 al mes, más tu inversión en anuncios. ¿Está dentro de tu presupuesto?',
+    'popup.q4_opt1': 'Sí',
+    'popup.q4_opt2': 'Necesito más información',
+    'popup.q4_opt3': 'No por ahora',
+    'popup.q4_err': 'Selecciona una opción.',
+    'popup.q5_label': '¿Cuándo te gustaría empezar?',
+    'popup.q5_opt1': 'Esta semana',
+    'popup.q5_opt2': 'Este mes',
+    'popup.q5_opt3': 'Solo estoy averiguando',
+    'popup.q5_err': 'Selecciona una opción.',
+    'popup.final_cta': 'Agendar mi diagnóstico',
+    'popup.cal_btn': 'Elegir fecha y hora',
+    'popup.thanks_title_qualified': '¡Listo! Agenda tu diagnóstico ahora',
+    'popup.thanks_text_not_qualified': 'Gracias por tu interés. Te escribiremos por WhatsApp con información útil para cuando estés listo.'
   },
   en: {
     'meta.title_suffix': 'Digital Traffic Management & Lead Generation',
@@ -1093,7 +1235,7 @@ const I18N = {
     'footer.privacy': 'Privacy notice',
     'wa.aria_label': 'Message us on WhatsApp',
     'wa.default_message': "Hi, I'd like more information about your services.",
-    'wa.after_submit': (nombre)=> `Hi, I'm ${nombre}. I just signed up for the free diagnosis.`,
+    'wa.after_submit': (nombre, tipoNegocio)=> `Hi, I'm ${nombre}. My business type is "${tipoNegocio}" and I just signed up to book my free diagnosis.`,
     'popup.close': 'Close',
     'popup.eyebrow': '✦ First step',
     'popup.title': 'Book your free diagnosis',
@@ -1112,7 +1254,43 @@ const I18N = {
     'popup.thanks_prefix': 'Thank you',
     'popup.thanks_text': "We received your information. The next step is a quick conversation about your business and your goals.",
     'popup.wa_continue': 'Continue on WhatsApp',
-    'popup.send_error': "We couldn't send your information. Try again or message us directly on WhatsApp."
+    'popup.send_error': "We couldn't send your information. Try again or message us directly on WhatsApp.",
+    'popup.step_label_1': 'Step 1 of 2',
+    'popup.step_label_2': 'Step 2 of 2',
+    'popup.continue_btn': 'Continue',
+    'popup.back': 'Back',
+    'popup.q1_label': 'What type of business do you have?',
+    'popup.q1_opt1': 'Clinic/practice',
+    'popup.q1_opt2': 'Repair/technical service',
+    'popup.q1_opt3': 'Restaurant/food',
+    'popup.q1_opt4': 'Shop/retail',
+    'popup.q1_opt5': 'Independent professional',
+    'popup.q1_opt6': 'Other',
+    'popup.q1_err': 'Select an option.',
+    'popup.q2_label': 'How long has your business been running?',
+    'popup.q2_opt1': 'More than 1 year',
+    'popup.q2_opt2': 'Less than 1 year',
+    'popup.q2_opt3': "I haven't opened yet",
+    'popup.q2_err': 'Select an option.',
+    'popup.q3_label': 'Do you have an Instagram or website for your business?',
+    'popup.q3_opt_si': 'Yes',
+    'popup.q3_opt_no': "I don't have one",
+    'popup.q3_link_label': 'Instagram or website link (optional)',
+    'popup.q3_err': 'Select an option.',
+    'popup.q4_label': 'Our management service runs USD 200–600 per month, plus your ad spend. Does that fit your budget?',
+    'popup.q4_opt1': 'Yes',
+    'popup.q4_opt2': 'I need more information',
+    'popup.q4_opt3': 'Not right now',
+    'popup.q4_err': 'Select an option.',
+    'popup.q5_label': 'When would you like to start?',
+    'popup.q5_opt1': 'This week',
+    'popup.q5_opt2': 'This month',
+    'popup.q5_opt3': "Just checking for now",
+    'popup.q5_err': 'Select an option.',
+    'popup.final_cta': 'Book my diagnosis',
+    'popup.cal_btn': 'Pick a date & time',
+    'popup.thanks_title_qualified': "All set! Book your diagnosis now",
+    'popup.thanks_text_not_qualified': "Thanks for your interest. We'll message you on WhatsApp with useful information for when you're ready."
   }
 };
 
@@ -1319,6 +1497,64 @@ function initRealtimeValidation(){
   });
 }
 
+/* ============================================================
+   PASO 2: preguntas de calificación
+   ============================================================ */
+const STEP2_FIELDS = [
+  { name:'tipo_negocio', fieldId:'field-tipo_negocio' },
+  { name:'antiguedad', fieldId:'field-antiguedad' },
+  { name:'tiene_redes', fieldId:'field-redes' },
+  { name:'presupuesto', fieldId:'field-presupuesto' },
+  { name:'cuando_empezar', fieldId:'field-cuando' }
+];
+
+function validateStep2(){
+  let valid = true;
+  STEP2_FIELDS.forEach(({name, fieldId})=>{
+    const checked = document.querySelector(`input[name="${name}"]:checked`);
+    document.getElementById(fieldId).classList.toggle('error', !checked);
+    if (!checked) valid = false;
+  });
+  return valid;
+}
+
+function initStep2RealtimeValidation(){
+  STEP2_FIELDS.forEach(({name, fieldId})=>{
+    document.querySelectorAll(`input[name="${name}"]`).forEach(r=>{
+      r.addEventListener('change', ()=> document.getElementById(fieldId).classList.remove('error'));
+    });
+  });
+}
+
+/* Muestra/oculta el campo de enlace según si tiene redes o no */
+function initRedesToggle(){
+  document.querySelectorAll('input[name="tiene_redes"]').forEach(r=>{
+    r.addEventListener('change', ()=>{
+      const show = document.querySelector('input[name="tiene_redes"]:checked')?.value === 'si';
+      document.getElementById('field-enlace_negocio').style.display = show ? '' : 'none';
+      if (!show) document.getElementById('enlace_negocio').value = '';
+    });
+  });
+}
+
+/* Navegación entre paso 1 y paso 2 del formulario */
+function goToStep(step){
+  document.getElementById('formStep1').classList.toggle('active', step === 1);
+  document.getElementById('formStep2').classList.toggle('active', step === 2);
+  document.getElementById('stepBarFill').style.width = step === 1 ? '50%' : '100%';
+  document.getElementById('stepLabel').textContent = I18N[currentLang][step === 1 ? 'popup.step_label_1' : 'popup.step_label_2'];
+}
+
+function initStepNav(){
+  document.getElementById('step1NextBtn').addEventListener('click', ()=>{
+    if (!validateForm()) return;
+    goToStep(2);
+  });
+  document.getElementById('step2BackBtn').addEventListener('click', ()=>{
+    goToStep(1);
+  });
+}
+
 function getUtmParams(){
   const params = new URLSearchParams(window.location.search);
   return {
@@ -1356,7 +1592,8 @@ function initFormSubmit(){
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
     if (isSubmitting) return;
-    if (!validateForm()) return;
+    if (!validateForm()){ goToStep(1); return; }
+    if (!validateStep2()) return;
 
     isSubmitting = true;
     submitBtn.classList.add('loading');
@@ -1369,11 +1606,27 @@ function initFormSubmit(){
     const email = document.getElementById('email').value.trim();
     const pais = document.getElementById('pais').value;
 
+    const tipoNegocio = document.querySelector('input[name="tipo_negocio"]:checked').value;
+    const antiguedad = document.querySelector('input[name="antiguedad"]:checked').value;
+    const enlaceNegocio = document.getElementById('enlace_negocio').value.trim();
+    const presupuesto = document.querySelector('input[name="presupuesto"]:checked').value;
+    const cuandoEmpezar = document.querySelector('input[name="cuando_empezar"]:checked').value;
+
+    const antiguedadOk = (antiguedad === 'Más de 1 año' || antiguedad === 'Menos de 1 año');
+    const presupuestoOk = (presupuesto === 'Sí' || presupuesto === 'Necesito más información');
+    const calificado = (antiguedadOk && presupuestoOk) ? 'SI' : 'NO';
+
     const payload = {
       nombre,
       telefono: `${dialCode} ${telefonoRaw}`,
       email,
       pais,
+      tipo_negocio: tipoNegocio,
+      antiguedad,
+      enlace_negocio: enlaceNegocio,
+      presupuesto,
+      cuando_empezar: cuandoEmpezar,
+      calificado,
       fecha_hora: new Date().toISOString(),
       url_origen: window.location.href,
       ...getUtmParams()
@@ -1382,12 +1635,29 @@ function initFormSubmit(){
     try{
       await sendLead(payload);
 
-      if (typeof fbq === 'function') fbq('track', 'Lead');
+      if (typeof fbq === 'function'){
+        fbq('track', 'Lead');
+        if (calificado === 'SI') fbq('trackCustom', 'LeadCalificado');
+      }
       if (typeof gtag === 'function') gtag('event', 'generate_lead');
 
-      document.getElementById('thankyouTitle').textContent = `${I18N[currentLang]['popup.thanks_prefix']}, ${nombre.split(' ')[0]}!`;
-      const waMsg = I18N[currentLang]['wa.after_submit'](nombre);
-      document.getElementById('waContinue').href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
+      const calBtn = document.getElementById('calBtn');
+      const waBtn = document.getElementById('waContinue');
+
+      if (calificado === 'SI'){
+        document.getElementById('thankyouTitle').textContent = I18N[currentLang]['popup.thanks_title_qualified'];
+        document.getElementById('thankyouText').textContent = I18N[currentLang]['popup.thanks_text'];
+        calBtn.href = CONFIG.CALENDAR_URL;
+        calBtn.style.display = '';
+        const waMsg = I18N[currentLang]['wa.after_submit'](nombre, tipoNegocio);
+        waBtn.href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
+        waBtn.style.display = '';
+      } else {
+        document.getElementById('thankyouTitle').textContent = `${I18N[currentLang]['popup.thanks_prefix']}, ${nombre.split(' ')[0]}!`;
+        document.getElementById('thankyouText').textContent = I18N[currentLang]['popup.thanks_text_not_qualified'];
+        calBtn.style.display = 'none';
+        waBtn.style.display = 'none';
+      }
 
       document.getElementById('formView').style.display = 'none';
       document.getElementById('thankyouView').classList.add('active');
@@ -1413,6 +1683,10 @@ function resetPopupOnClose(){
         document.querySelectorAll('.field.error, .checkbox-row.error').forEach(f=> f.classList.remove('error'));
         document.getElementById('pais').value = DEFAULT_COUNTRY;
         document.getElementById('dialCode').value = DEFAULT_COUNTRY;
+        goToStep(1);
+        document.getElementById('field-enlace_negocio').style.display = 'none';
+        document.getElementById('calBtn').style.display = 'none';
+        document.getElementById('waContinue').style.display = '';
       }, 300);
     }
   });
@@ -1428,8 +1702,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
   initFaq();
   initPopupTriggers();
   initRealtimeValidation();
+  initStep2RealtimeValidation();
+  initRedesToggle();
+  initStepNav();
   initFormSubmit();
   resetPopupOnClose();
+  goToStep(1);
 });
 </script>
 
@@ -1445,10 +1723,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 function doPost(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   const data = JSON.parse(e.postData.contents);
-  sheet.appendRow([
+  const row = sheet.getLastRow() + 1;
+  sheet.getRange(row, 3).setNumberFormat("@"); // evita que el teléfono se lea como fórmula
+  sheet.getRange(row, 1, 1, 17).setValues([[
     new Date(),
     data.nombre || "",
-    data.telefono || "",
+    String(data.telefono || ""),
     data.email || "",
     data.pais || "",
     data.url_origen || "",
@@ -1456,8 +1736,14 @@ function doPost(e) {
     data.utm_medium || "",
     data.utm_campaign || "",
     data.utm_term || "",
-    data.utm_content || ""
-  ]);
+    data.utm_content || "",
+    data.tipo_negocio || "",
+    data.antiguedad || "",
+    data.enlace_negocio || "",
+    data.presupuesto || "",
+    data.cuando_empezar || "",
+    data.calificado || ""
+  ]]);
   return ContentService.createTextOutput(JSON.stringify({ result: "ok" }))
     .setMimeType(ContentService.MimeType.JSON);
 }
