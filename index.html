@@ -340,7 +340,6 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
 }
 .thankyou h2{margin-bottom:10px}
 .thankyou p{color:var(--text-muted);margin-bottom:24px;font-size:15px}
-.thankyou .cal-btn{margin-bottom:12px}
 
 /* ---------- formulario de 2 pasos ---------- */
 .form-step{display:none}
@@ -879,7 +878,6 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
       </div>
       <h2 id="thankyouTitle" data-i18n="popup.thanks_default">¡Gracias!</h2>
       <p id="thankyouText" data-i18n="popup.thanks_text">Recibimos tus datos. El siguiente paso es conversar brevemente sobre tu negocio y tus objetivos.</p>
-      <a href="#" id="calBtn" class="btn btn-primary cal-btn" target="_blank" rel="noopener" style="display:none"><span data-i18n="popup.cal_btn">Elegir fecha y hora</span></a>
       <a href="https://wa.me/573016026374?text=Hola%20Eder%2C%20acabo%20de%20registrarme%20para%20el%20diagn%C3%B3stico%20gratuito" id="waContinue" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="popup.wa_continue">Continuar por WhatsApp</a>
     </div>
   </div>
@@ -893,7 +891,6 @@ const CONFIG = {
   BRAND_NAME: "Impulsa Ventas - Eder Ads",
   WHATSAPP_NUMBER: "573016026374", // solo dígitos, con código de país, sin '+' ni espacios
   WEBHOOK_URL: "https://script.google.com/macros/s/AKfycbx9ZPE7AIROUFB2wTbzQaHoObyqUp-tSwHknpLrWoQhQZizKIQCAK8QdIGMSa3SzzT5Vw/exec", // Google Apps Script conectado a "Leads - Impulsa Ventas"
-  CALENDAR_URL: "PEGAR_AQUI_TU_ENLACE_DE_CALENDARIO", // ej: tu enlace de Calendly/Google Calendar para agendar el diagnóstico
   metrics: {
     campaigns: "150+",
     leads: "32,000+",
@@ -1135,8 +1132,7 @@ const I18N = {
     'popup.q5_opt3': 'Solo estoy averiguando',
     'popup.q5_err': 'Selecciona una opción.',
     'popup.final_cta': 'Agendar mi diagnóstico',
-    'popup.cal_btn': 'Elegir fecha y hora',
-    'popup.thanks_title_qualified': '¡Listo! Agenda tu diagnóstico ahora',
+    'popup.thanks_title_qualified': '¡Listo! Continuemos por WhatsApp',
     'popup.thanks_text_not_qualified': 'Gracias por tu interés. Te escribiremos por WhatsApp con información útil para cuando estés listo.'
   },
   en: {
@@ -1288,8 +1284,7 @@ const I18N = {
     'popup.q5_opt3': "Just checking for now",
     'popup.q5_err': 'Select an option.',
     'popup.final_cta': 'Book my diagnosis',
-    'popup.cal_btn': 'Pick a date & time',
-    'popup.thanks_title_qualified': "All set! Book your diagnosis now",
+    'popup.thanks_title_qualified': "All set! Let's continue on WhatsApp",
     'popup.thanks_text_not_qualified': "Thanks for your interest. We'll message you on WhatsApp with useful information for when you're ready."
   }
 };
@@ -1641,21 +1636,17 @@ function initFormSubmit(){
       }
       if (typeof gtag === 'function') gtag('event', 'generate_lead');
 
-      const calBtn = document.getElementById('calBtn');
       const waBtn = document.getElementById('waContinue');
 
       if (calificado === 'SI'){
         document.getElementById('thankyouTitle').textContent = I18N[currentLang]['popup.thanks_title_qualified'];
         document.getElementById('thankyouText').textContent = I18N[currentLang]['popup.thanks_text'];
-        calBtn.href = CONFIG.CALENDAR_URL;
-        calBtn.style.display = '';
         const waMsg = I18N[currentLang]['wa.after_submit'](nombre, tipoNegocio);
         waBtn.href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
         waBtn.style.display = '';
       } else {
         document.getElementById('thankyouTitle').textContent = `${I18N[currentLang]['popup.thanks_prefix']}, ${nombre.split(' ')[0]}!`;
         document.getElementById('thankyouText').textContent = I18N[currentLang]['popup.thanks_text_not_qualified'];
-        calBtn.style.display = 'none';
         waBtn.style.display = 'none';
       }
 
@@ -1685,7 +1676,6 @@ function resetPopupOnClose(){
         document.getElementById('dialCode').value = DEFAULT_COUNTRY;
         goToStep(1);
         document.getElementById('field-enlace_negocio').style.display = 'none';
-        document.getElementById('calBtn').style.display = 'none';
         document.getElementById('waContinue').style.display = '';
       }, 300);
     }
