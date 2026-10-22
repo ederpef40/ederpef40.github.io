@@ -269,7 +269,7 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
 /* ---------- whatsapp flotante ---------- */
 .wa-float{
   position:fixed;bottom:24px;right:24px;z-index:90;
-  width:60px;height:60px;border-radius:50%;background:#25D366;
+  width:60px;height:60px;padding:0;border-radius:50%;background:#25D366;
   display:flex;align-items:center;justify-content:center;color:#fff;
   box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s ease;
 }
@@ -732,9 +732,9 @@ footer{border-top:1px solid var(--border);padding:56px 0 28px}
 <!-- ============================================================
      WHATSAPP FLOTANTE
      ============================================================ -->
-<a href="#" id="waFloat" class="wa-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-i18n-attr="aria-label:wa.aria_label">
+<button type="button" id="waFloat" class="wa-float js-open-popup" aria-label="Escríbenos por WhatsApp" data-i18n-attr="aria-label:wa.aria_label">
   <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.6-1.2-1.4-1.4-1.7-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5-.1-.1-.5-1.3-.7-1.8-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 3.9 3.4.5.2 1 .4 1.3.5.5.2 1 .1 1.4.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1-.1-.1-.2-.2-.4-.3z"/></svg>
-</a>
+</button>
 
 <!-- ============================================================
      POPUP DE REGISTRO
@@ -1078,7 +1078,6 @@ const I18N = {
     'footer.rights': 'Todos los derechos reservados.',
     'footer.privacy': 'Aviso de privacidad',
     'wa.aria_label': 'Escríbenos por WhatsApp',
-    'wa.default_message': 'Hola, quiero más información sobre sus servicios.',
     'wa.after_submit': (nombre, tipoNegocio)=> `Hola, soy ${nombre}. Mi negocio es de tipo "${tipoNegocio}" y acabo de registrarme para agendar mi diagnóstico gratuito.`,
     'popup.close': 'Cerrar',
     'popup.eyebrow': '✦ Primer paso',
@@ -1230,7 +1229,6 @@ const I18N = {
     'footer.rights': 'All rights reserved.',
     'footer.privacy': 'Privacy notice',
     'wa.aria_label': 'Message us on WhatsApp',
-    'wa.default_message': "Hi, I'd like more information about your services.",
     'wa.after_submit': (nombre, tipoNegocio)=> `Hi, I'm ${nombre}. My business type is "${tipoNegocio}" and I just signed up to book my free diagnosis.`,
     'popup.close': 'Close',
     'popup.eyebrow': '✦ First step',
@@ -1316,14 +1314,6 @@ function applyI18n(lang){
 
   document.title = `${CONFIG.BRAND_NAME} | ${dict['meta.title_suffix']}`;
   document.querySelector('meta[name="description"]').setAttribute('content', dict['meta.description']);
-
-  updateWaFloat(lang);
-}
-
-/* Actualiza el enlace flotante de WhatsApp con el mensaje del idioma activo */
-function updateWaFloat(lang){
-  const msg = I18N[lang]['wa.default_message'];
-  document.getElementById('waFloat').href = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 }
 
 /* Selector de idioma (header): recuerda la elección y repuebla país/código */
